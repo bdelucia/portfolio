@@ -6,8 +6,6 @@ import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
-import { SmoothCursor } from "@/components/ui/smooth-cursor";
-import { GridBeams } from "@/components/magicui/grid-beams";
 
 const fontSans = FontSans({
     subsets: ["latin"],
