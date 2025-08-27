@@ -1,4 +1,4 @@
-import BlogCarousel from "@/components/BlogCarousel";
+import BlogCarousel from "@/features/blog/BlogCarousel";
 import type { MDXComponents } from "mdx/types";
 
 const components = {
@@ -7,8 +7,5 @@ const components = {
 } satisfies MDXComponents;
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
-    return {
-        ...components,
-        BlogCarousel,
-    };
+    return components;
 }

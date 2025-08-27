@@ -15,24 +15,7 @@ interface BlogCarouselProps {
 
 export default function BlogCarousel({ images = [] }: BlogCarouselProps) {
     // If no images provided, don't render anything
-    if (images.length === 0) return;
-
-    // If only one image, render without navigation arrows
-    if (images.length === 1) {
-        return (
-            <div className="w-full max-w-xs">
-                <Card>
-                    <CardContent className="p-1">
-                        <img
-                            src={images[0]}
-                            alt="Carousel image"
-                            className="w-full h-auto rounded-lg"
-                        />
-                    </CardContent>
-                </Card>
-            </div>
-        );
-    }
+    if (images.length <= 1) return;
 
     // Multiple images - render with carousel navigation
     return (
@@ -43,10 +26,12 @@ export default function BlogCarousel({ images = [] }: BlogCarouselProps) {
                         <div className="p-1">
                             <Card>
                                 <CardContent className="p-1">
-                                    <img
+                                    <Image
                                         src={image}
                                         alt={`Carousel image ${index + 1}`}
                                         className="w-full h-auto rounded-lg"
+                                        width={312}
+                                        height={416}
                                     />
                                 </CardContent>
                             </Card>
