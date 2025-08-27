@@ -8,6 +8,9 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import BlogCarousel from "@/components/BlogCarousel";
 import Table from "@/components/Table";
 
+// Import the BLOG_IMGS_URL constant
+const BLOG_IMGS_URL = `https://pub-22e36f870e1647a6a48e07c2fa9d9ae8.r2.dev/`;
+
 export async function generateStaticParams() {
     const posts = await getBlogPosts();
     return posts.map((post) => ({ slug: post.slug }));
@@ -73,6 +76,28 @@ export default async function Blog({
     const components = {
         BlogCarousel,
         Table,
+        // Make BLOG_IMGS_URL available as a component
+        BLOG_IMGS_URL: () => <span>{BLOG_IMGS_URL}</span>,
+        // Create a component that can be used to build image URLs
+        ImageUrl: ({ path }: { path: string }) => (
+            <span>{`${BLOG_IMGS_URL}${path}`}</span>
+        ),
+        // Create a component that renders an image with the base URL
+        RecipeImage: ({
+            src,
+            alt,
+            className = "my-6 rounded-lg",
+        }: {
+            src: string;
+            alt: string;
+            className?: string;
+        }) => (
+            <img
+                src={src.startsWith("http") ? src : `${BLOG_IMGS_URL}${src}`}
+                alt={alt}
+                className={className}
+            />
+        ),
     };
 
     return (
