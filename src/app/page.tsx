@@ -4,7 +4,6 @@ import { ProjectCard } from "@/components/project-card";
 import { ResumeCard } from "@/components/resume-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { WavingHand } from "@/features/portfolio/WavingHand";
 import { DATA } from "@/data/resume";
 import Link from "next/link";
 import Markdown from "react-markdown";
@@ -22,9 +21,10 @@ export default function Page() {
                                 <BlurFadeText
                                     delay={BLUR_FADE_DELAY}
                                     yOffset={8}
-                                    text={`Hi, I'm ${DATA.name.split(" ")[0]} `}
+                                    text={`Hi, I'm ${
+                                        DATA.name.split(" ")[0]
+                                    } 🤌 `}
                                 />
-                                <WavingHand />
                             </div>
                             <BlurFadeText
                                 className="max-w-[600px] md:text-xl"
@@ -135,8 +135,8 @@ export default function Page() {
                                 <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                                     I&apos;ve worked on a variety of projects,
                                     from simple websites to complex web
-                                    applications. Here are a few of my
-                                    favorites.
+                                    applications. Here are a few of my most
+                                    recent.
                                 </p>
                             </div>
                         </div>
@@ -174,15 +174,14 @@ export default function Page() {
                                 Get in Touch
                             </h2>
                             <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                                Want to chat? Just shoot me a dm{" "}
+                                Want to chat? Just shoot me a DM{" "}
                                 <Link
-                                    href={DATA.contact.social.X.url}
+                                    href={DATA.contact.social.LinkedIn.url}
                                     className="text-blue-500 hover:underline"
                                 >
-                                    with a direct question on twitter
+                                    with a direct question on LinkedIn
                                 </Link>{" "}
-                                and I&apos;ll respond whenever I can. I will
-                                ignore all soliciting.
+                                and I&apos;ll respond whenever I can.
                             </p>
                         </div>
                     </BlurFade>
