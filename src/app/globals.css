@@ -4,160 +4,217 @@
 
 @layer base {
     :root {
-      --background: 0 0% 100%;
-      --foreground: 210 11.1% 3.53%;
+        --background: 0 0% 100%;
+        --foreground: 210 11.1% 3.53%;
 
-      --card: 0 0% 100%;
-      --card-foreground: 210 11.1% 3.53%;
+        --card: 0 0% 100%;
+        --card-foreground: 210 11.1% 3.53%;
 
-      --popover: 0 0% 100%;
-      --popover-foreground: 210 11.1% 3.53%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 210 11.1% 3.53%;
 
-      --primary: 0 0% 9%;
-      --primary-foreground: 0 0% 98%;
+        --primary: 0 0% 9%;
+        --primary-foreground: 0 0% 98%;
 
-      --secondary: 0 0% 96.1%;
-      --secondary-foreground: 0 0% 9%;
+        --secondary: 0 0% 96.1%;
+        --secondary-foreground: 0 0% 9%;
 
-      --muted: 0 0% 96.1%;
-      --muted-foreground: 0 0% 45.1%;
+        --muted: 0 0% 96.1%;
+        --muted-foreground: 0 0% 45.1%;
 
-      --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
+        --accent: 0 0% 96.1%;
+        --accent-foreground: 0 0% 9%;
 
-      --destructive: 0 84.2% 60.2%;
-      --destructive-foreground: 0 0% 98%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
 
-      --border: 0 0% 89.8%;
-      --input: 0 0% 89.8%;
-      --ring: 0 0% 3.9%;
+        --border: 0 0% 89.8%;
+        --input: 0 0% 89.8%;
+        --ring: 0 0% 3.9%;
 
-      --radius: 0.5rem;
+        --radius: 0.5rem;
     }
 
     .dark {
-      --background: 210 11.1% 3.53%;
-      --foreground: 0 0% 98%;
+        --background: 210 11.1% 3.53%;
+        --foreground: 0 0% 98%;
 
-      --card: 210 11.1% 3.53%;
-      --card-foreground: 0 0% 98%;
+        --card: 210 11.1% 3.53%;
+        --card-foreground: 0 0% 98%;
 
-      --popover: 210 11.1% 3.53%;
-      --popover-foreground: 0 0% 98%;
+        --popover: 210 11.1% 3.53%;
+        --popover-foreground: 0 0% 98%;
 
-      --primary: 0 0% 98%;
-      --primary-foreground: 0 0% 9%;
+        --primary: 0 0% 98%;
+        --primary-foreground: 0 0% 9%;
 
-      --secondary: 0 0% 14.9%;
-      --secondary-foreground: 0 0% 98%;
+        --secondary: 0 0% 14.9%;
+        --secondary-foreground: 0 0% 98%;
 
-      --muted: 0 0% 14.9%;
-      --muted-foreground: 0 0% 63.9%;
+        --muted: 0 0% 14.9%;
+        --muted-foreground: 0 0% 63.9%;
 
-      --accent: 0 0% 14.9%;
-      --accent-foreground: 0 0% 98%;
+        --accent: 0 0% 14.9%;
+        --accent-foreground: 0 0% 98%;
 
-      --destructive: 0 62.8% 30.6%;
-      --destructive-foreground: 0 0% 98%;
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 0 0% 98%;
 
-      --border: 0 0% 14.9%;
-      --input: 0 0% 14.9%;
-      --ring: 0 0% 83.1%;
+        --border: 0 0% 14.9%;
+        --input: 0 0% 14.9%;
+        --ring: 0 0% 83.1%;
     }
-  .theme {
+    .theme {
         --animate-meteor: meteor 5s linear infinite;
     }
-  }
+}
 
-  @layer base {
+@layer base {
     * {
-      @apply border-border;
+        @apply border-border;
     }
     body {
-      @apply bg-background text-foreground;
+        @apply bg-background text-foreground;
     }
-  }
+}
 
-  h3 code {
+h3 code {
     @apply !text-lg md:!text-xl;
-  }
+}
 
-  pre {
-    @apply !px-0 rounded-lg overflow-x-auto py-4
-  }
+pre {
+    @apply !px-0 rounded-lg overflow-x-auto py-4;
+}
 
-  pre [data-line] {
-    @apply px-4
-  }
+pre [data-line] {
+    @apply px-4;
+}
 
-  code {
+code {
     @apply text-sm md:text-base !leading-loose;
-  }
+}
 
-  pre > code {
+pre > code {
     counter-reset: line;
-  }
+}
 
-  code[data-theme*=" "],
-  code[data-theme*=" "] span {
+code[data-theme*=" "],
+code[data-theme*=" "] span {
     color: var(--shiki-light);
     background-color: var(--shiki-light-bg);
-  }
+}
 
-  @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
     code[data-theme*=" "],
     code[data-theme*=" "] span {
-      color: var(--shiki-dark);
-      background-color: var(--shiki-dark-bg);
+        color: var(--shiki-dark);
+        background-color: var(--shiki-dark-bg);
     }
-  }
+}
 
-  code[data-line-numbers] {
+code[data-line-numbers] {
     counter-reset: line;
-  }
+}
 
-  code[data-line-numbers] > [data-line]::before {
+code[data-line-numbers] > [data-line]::before {
     counter-increment: line;
     content: counter(line);
     @apply inline-block w-4 mr-4 text-right text-gray-500;
-  }
+}
 
-  code {
+code {
     counter-reset: line;
-  }
+}
 
-  code > [data-line]::before {
-  counter-increment: line;
-  content: counter(line);
+code > [data-line]::before {
+    counter-increment: line;
+    content: counter(line);
 
-  /* Other styling */
-  display: inline-block;
-  width: 1rem;
-  margin-right: 2rem;
-  text-align: right;
-  color: gray;
+    /* Other styling */
+    display: inline-block;
+    width: 1rem;
+    margin-right: 2rem;
+    text-align: right;
+    color: gray;
 }
 
 code[data-line-numbers-max-digits="2"] > [data-line]::before {
-  width: 2rem;
+    width: 2rem;
 }
 
 code[data-line-numbers-max-digits="3"] > [data-line]::before {
-  width: 3rem;
+    width: 3rem;
 }
 
 @theme inline {
-  @keyframes meteor {
-  0% {
-    transform: rotate(var(--angle)) translateX(0);
-    opacity: 1;
+    @keyframes meteor {
+        0% {
+            transform: rotate(var(--angle)) translateX(0);
+            opacity: 1;
         }
-  70% {
-    opacity: 1;
+        70% {
+            opacity: 1;
         }
-  100% {
-    transform: rotate(var(--angle)) translateX(-500px);
-    opacity: 0;
+        100% {
+            transform: rotate(var(--angle)) translateX(-500px);
+            opacity: 0;
         }
     }
+}
+
+.footer-container {
+    background-color: #000000;
+    color: #f6f5f4;
+    width: 100vw;
+    text-align: center;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-top: auto;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#footer-img {
+    max-width: 300px;
+    margin-right: 40px;
+}
+
+.left-footer {
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#contact-me {
+    font-weight: 400;
+    font-size: 2rem;
+}
+
+#get-in-touch {
+    max-width: 300px;
+}
+
+#phone-icon,
+#email-icon {
+    background-color: #f6f5f4;
+    color: #363534;
+    width: 20px;
+    border-radius: 20px;
+    padding: 4px;
+}
+
+.phone-container,
+.email-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
 }
