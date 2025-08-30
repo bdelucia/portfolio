@@ -91,7 +91,7 @@ export default async function Blog({
             <div className="flex-1">
                 <section
                     id="blog"
-                    className="px-4 py-4 rounded-lg bg-gray-50 dark:bg-gray-50/10 max-w-4xl mx-auto my-8 mt-16 sm:my-0 sm:mt-0"
+                    className="px-4 py-4 rounded-lg bg-gray-50 dark:bg-gray-50/10 max-w-4xl mx-auto my-24"
                 >
                     <script
                         type="application/ld+json"
