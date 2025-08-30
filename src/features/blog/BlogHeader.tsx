@@ -56,7 +56,7 @@ export function BlogHeader({
 
             {scrollProgress && (
                 <div className="absolute bottom-0 left-0 right-0">
-                    <ScrollProgress className="top-[64px]" />
+                    <ScrollProgress className="top-[63px]" />
                 </div>
             )}
         </header>

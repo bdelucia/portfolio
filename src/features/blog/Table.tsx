@@ -10,12 +10,12 @@ export default function Table({ headers, rows, className = "" }: TableProps) {
     return (
         <div className={`overflow-x-auto my-6 ${className}`}>
             <table className="min-w-full border-collapse border border-gray-300 dark:border-gray-600">
-                <thead className="bg-gray-50 dark:bg-gray-800">
+                <thead className="bg-gray-400">
                     <tr>
                         {headers.map((header, index) => (
                             <th
                                 key={index}
-                                className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider border border-gray-300 dark:border-gray-600"
+                                className="px-6 py-3 text-left text-xs font-medium text-foreground dark:text-background uppercase tracking-wider border border-gray-300 dark:border-gray-600"
                             >
                                 {header}
                             </th>
