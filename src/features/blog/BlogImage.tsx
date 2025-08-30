@@ -68,11 +68,11 @@ export default function BlogImage({
                     />
 
                     {/* Modal Content */}
-                    <div className="relative z-50 max-w-2xl max-h-[90vh] overflow-hidden rounded-lg bg-gray-50 dark:bg-gray-50/10 shadow-2xl">
+                    <div className="relative z-50 max-w-2xl max-h-[90vh] overflow-hidden rounded-lg bg-background shadow-2xl">
                         {/* Header */}
                         <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
                             <div className="flex-1" />
-                            <h3 className="flex-1 text-center text-lg font-semibold text-gray-900 dark:text-gray-100">
+                            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                                 {alt}
                             </h3>
                             <div className="flex-1 flex justify-end">
