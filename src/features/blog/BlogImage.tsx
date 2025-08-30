@@ -37,19 +37,19 @@ export default function BlogImage({
     };
 
     const imageContent = (
-        <Card>
+        <Card className="bg-transparent">
             <CardContent className="p-1">
                 <Image
                     src={imageSrc}
                     alt={alt}
-                    className={`${className} cursor-pointer hover:opacity-90 transition-opacity`}
+                    className={`${className} cursor-pointer hover:opacity-80 transition-opacity`}
                     width={312}
                     height={416}
                     onClick={handleImageClick}
                 />
             </CardContent>
             {caption && (
-                <div className="flex italic items-center justify-center -my-8 -mt-10">
+                <div className="flex italic items-center justify-center -mt-8 -mb-8">
                     <p>{caption}</p>
                 </div>
             )}
@@ -63,12 +63,12 @@ export default function BlogImage({
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
                     {/* Backdrop */}
                     <div
-                        className="fixed inset-0 bg-black/80 backdrop-blur-sm"
+                        className="fixed inset-0 backdrop-blur-sm"
                         onClick={closeModal}
                     />
 
                     {/* Modal Content */}
-                    <div className="relative z-50 max-w-2xl max-h-[90vh] overflow-hidden rounded-lg bg-white dark:bg-gray-900 shadow-2xl">
+                    <div className="relative z-50 max-w-2xl max-h-[90vh] overflow-hidden rounded-lg bg-gray-50 dark:bg-gray-50/10 shadow-2xl">
                         {/* Header */}
                         <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
                             <div className="flex-1" />
@@ -104,7 +104,7 @@ export default function BlogImage({
 
                         {/* Footer with caption */}
                         {caption && (
-                            <div className="border-t border-gray-200 dark:border-gray-700 p-4">
+                            <div className="border-t border-gray-200 dark:border-gray-700">
                                 <p className="text-center text-gray-600 dark:text-gray-400 italic">
                                     {caption}
                                 </p>

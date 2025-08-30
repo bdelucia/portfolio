@@ -21,11 +21,11 @@ export default function Footer() {
                     {/* Right side - Contact Info */}
                     <div className="text-center md:text-right">
                         <h3 className="text-lg font-semibold mb-3 text-gray-100">
-                            Contact Us
+                            Contact Me 👇
                         </h3>
                         <div className="space-y-2 text-gray-300">
                             <p className="hover:text-white transition-colors duration-200">
-                                Testing
+                                Bobby DeLucia
                             </p>
                             <p className="hover:text-white transition-colors duration-200">
                                 <a
