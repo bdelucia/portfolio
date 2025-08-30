@@ -1,6 +1,7 @@
 "use client";
 
 import { ScrollProgress } from "@/components/magicui/scroll-progress";
+import { ModeToggle } from "@/components/mode-toggle";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -13,12 +14,16 @@ export function BlogHeader({ className }: BlogHeaderProps) {
     return (
         <header
             className={cn(
-                "sticky top-0 z-40 w-full h-16 bg-background/80 backdrop-blur-sm border-b border-border",
+                "fixed top-0 z-40 w-full h-16 bg-foreground/90 dark:bg-foreground/90 backdrop-blur-sm border-b border-border",
                 className
             )}
+            style={{ height: "64px" }}
         >
-            {/* Header content */}
-            <div className="flex items-center justify-center h-full px-6">
+            <div className="flex items-center justify-between h-full px-6">
+                {/* Left section - empty for balance */}
+                <div className="w-20"></div>
+
+                {/* Center section - Back to Blog button */}
                 <Link
                     href="/blog"
                     className={cn(
@@ -28,11 +33,15 @@ export function BlogHeader({ className }: BlogHeaderProps) {
                 >
                     ← Back to Blog
                 </Link>
+
+                {/* Right section - ModeToggle */}
+                <div className="w-20 flex justify-end">
+                    <ModeToggle />
+                </div>
             </div>
 
-            {/* Scroll Progress Bar */}
             <div className="absolute bottom-0 left-0 right-0">
-                <ScrollProgress />
+                <ScrollProgress className="top-[64px]" />
             </div>
         </header>
     );

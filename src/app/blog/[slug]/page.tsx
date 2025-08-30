@@ -9,7 +9,7 @@ import BlogCarousel from "@/features/blog/BlogCarousel";
 import Table from "@/features/blog/Table";
 import BlogImage from "@/features/blog/BlogImage";
 import { BLOG_IMGS_URL } from "@/data/blog";
-import { BlogHeader } from "@/features/blog/blog-header";
+import { BlogHeader } from "@/features/blog/BlogHeader";
 import Footer from "@/features/blog/Footer";
 
 export async function generateStaticParams() {
@@ -85,10 +85,10 @@ export default async function Blog({
     };
 
     return (
-        <div className="flex flex-col min-h-screen">
+        <div className="flex flex-col h-screen">
             <BlogHeader />
 
-            <div className="flex flex-col flex-1">
+            <div className="flex-1">
                 <section
                     id="blog"
                     className="px-4 py-4 rounded-lg bg-gray-50 dark:bg-gray-50/10 max-w-4xl mx-auto"

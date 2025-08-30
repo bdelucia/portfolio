@@ -12,11 +12,11 @@ export function ModeToggle() {
             variant="ghost"
             type="button"
             size="icon"
-            className="px-2"
+            className="px-2 group"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         >
-            <SunIcon className="h-[1.2rem] w-[1.2rem] text-background dark:hidden dark:text-neutral-200" />
-            <MoonIcon className="hidden h-[1.2rem] w-[1.2rem] text-background dark:block dark:text-background" />
+            <SunIcon className="h-[1.2rem] w-[1.2rem] text-background group-hover:text-foreground dark:hidden dark:text-neutral-200 dark:group-hover:text-background" />
+            <MoonIcon className="hidden h-[1.2rem] w-[1.2rem] text-background group-hover:text-foreground dark:block dark:text-background dark:group-hover:text-neutral-200" />
         </Button>
     );
 }
