@@ -16,7 +16,7 @@ export default async function BlogPage() {
 
     return (
         <div className="flex flex-col h-screen">
-            <BlogHeader />
+            <BlogHeader title="Bob with a Blog" scrollProgress={true} />
 
             <div className="flex-1">
                 <section className="px-4 py-4 rounded-lg bg-gray-50 dark:bg-gray-50/10 max-w-4xl mx-auto my-24">
