@@ -15,17 +15,24 @@ import { motion } from "framer-motion";
 import { AuroraText } from "@/components/magicui/aurora-text";
 import { ShineBorder } from "@/components/magicui/shine-border";
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 const BLUR_FADE_DELAY = 0.04;
 
 export default function Page() {
     const { theme: currentTheme, resolvedTheme, systemTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
 
     // Use resolvedTheme for consistent rendering, fallback to systemTheme
     const effectiveTheme = resolvedTheme || systemTheme || "light";
 
-    // Wait for theme to be fully resolved to prevent hydration mismatch
-    if (!resolvedTheme) {
+    // Prevent hydration mismatch by only rendering after mount
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    // Don't render until mounted to prevent hydration mismatch
+    if (!mounted) {
         return (
             <main>
                 <div className="flex flex-col min-h-[100dvh] bg-gray-50 dark:bg-gray-50/10 space-y-10 max-w-2xl sm:max-w-3xl lg:max-w-4xl mx-4 sm:mx-auto my-12 box-border p-8 rounded-lg relative overflow-hidden">
