@@ -24,15 +24,30 @@ export default function Page() {
     // Use resolvedTheme for consistent rendering, fallback to systemTheme
     const effectiveTheme = resolvedTheme || systemTheme || "light";
 
+    // Wait for theme to be fully resolved to prevent hydration mismatch
+    if (!resolvedTheme) {
+        return (
+            <main>
+                <div className="flex flex-col min-h-[100dvh] bg-gray-50 dark:bg-gray-50/10 space-y-10 max-w-2xl sm:max-w-3xl lg:max-w-4xl mx-4 sm:mx-auto my-12 box-border p-8 rounded-lg relative overflow-hidden">
+                    <div className="flex items-center justify-center min-h-[200px]">
+                        <div className="text-lg">Loading...</div>
+                    </div>
+                </div>
+            </main>
+        );
+    }
+
     return (
         <main>
             <div className="flex flex-col min-h-[100dvh] bg-gray-50 dark:bg-gray-50/10 space-y-10 max-w-2xl sm:max-w-3xl lg:max-w-4xl mx-4 sm:mx-auto my-12 box-border p-8 rounded-lg relative overflow-hidden">
                 <ShineBorder
                     key={effectiveTheme}
+                    borderWidth={3}
+                    duration={20}
                     shineColor={
                         effectiveTheme === "dark"
                             ? ["#A07CFE", "#FE8FB5", "#FFBE7B"]
-                            : "gray"
+                            : "#000000"
                     }
                 />
                 <section id="hero">
