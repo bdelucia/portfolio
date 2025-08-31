@@ -1,3 +1,4 @@
+"use client";
 import BlurFade from "@/components/magicui/blur-fade";
 import BlurFadeText from "@/components/magicui/blur-fade-text";
 import Navbar from "@/components/navbar";
@@ -8,6 +9,9 @@ import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
 import Link from "next/link";
 import Markdown from "react-markdown";
+import Image from "next/image";
+import { WordRotate } from "@/components/magicui/word-rotate";
+import { motion } from "framer-motion";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -15,46 +19,94 @@ export default function Page() {
     return (
         <main className="flex flex-col min-h-[100dvh] bg-gray-50 dark:bg-gray-50/10 space-y-10 max-w-2xl sm:max-w-3xl lg:max-w-4xl mx-4 sm:mx-auto my-12 box-border p-8 rounded-lg">
             <section id="hero">
-                <div className="mx-auto w-full max-w-2xl space-y-8">
-                    <div className="gap-2 flex justify-between">
-                        <div className="flex-col flex flex-1 space-y-1.5">
-                            <div className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none flex">
-                                <BlurFadeText
-                                    delay={BLUR_FADE_DELAY}
-                                    yOffset={8}
-                                    text={`Hi, I'm ${
-                                        DATA.name.split(" ")[0]
-                                    } 🤌 `}
+                <div className="mx-auto w-full max-w-2xl sm:max-w-3xl lg:max-w-4xl space-y-8">
+                    <div className="gap-2 grid justify-between">
+                        <section
+                            id="hero-text"
+                            className="col-span-3 row-span-1"
+                        >
+                            <div className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
+                                Hi, I&apos;m {DATA.name.split(" ")[0]}{" "}
+                                <motion.span
+                                    id="pinchedFingers"
+                                    className="inline-block"
+                                    style={{
+                                        transformOrigin: "left center",
+                                    }}
+                                    initial={{ rotate: 0, scale: 1 }}
+                                    animate={{
+                                        rotate: [0, -90, 0, -90, 0],
+                                        scale: [1, 1.05, 1, 1.05, 1],
+                                    }}
+                                    transition={{
+                                        duration: 0.8,
+                                        repeat: Infinity,
+                                        repeatDelay: 2,
+                                        ease: "easeOut",
+                                        times: [0, 0.2, 0.4, 0.6, 0.8],
+                                    }}
+                                    whileHover={{
+                                        rotate: [0, -90, 0],
+                                        scale: 1.1,
+                                        transition: { duration: 0.3 },
+                                    }}
+                                >
+                                    🤌
+                                </motion.span>
+                            </div>
+                            <div className="flex items-center gap-2 sm:gap-3 flex-nowrap">
+                                <span className="md:text-lg whitespace-nowrap">
+                                    {DATA.description}
+                                </span>
+                                <WordRotate
+                                    words={[...DATA.nicknames]}
+                                    className="inline-block text-left w-20 sm:w-24 md:w-28 flex-shrink-0 md:text-lg"
+                                    duration={3000}
                                 />
                             </div>
-                            <BlurFadeText
-                                className="max-w-[600px] md:text-xl"
-                                delay={BLUR_FADE_DELAY}
-                                text={DATA.description}
-                            />
+                        </section>
+                        <div className="row-start-2 col-span-2 md:col-span-3 row-span-3">
+                            <section id="about">
+                                <BlurFade delay={BLUR_FADE_DELAY * 3}>
+                                    <h2 className="text-xl font-bold">About</h2>
+                                </BlurFade>
+                                <BlurFade delay={BLUR_FADE_DELAY * 4}>
+                                    <Markdown className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
+                                        {DATA.summary}
+                                    </Markdown>
+                                </BlurFade>
+                            </section>
                         </div>
-                        <BlurFade delay={BLUR_FADE_DELAY}>
-                            <Avatar className="size-28 border">
-                                <AvatarImage
-                                    alt={DATA.name}
-                                    src={DATA.avatarUrl}
-                                />
-                                <AvatarFallback>{DATA.initials}</AvatarFallback>
-                            </Avatar>
-                        </BlurFade>
+                        <div className="col-start-4 col-span-2 row-span-1 md:row-span-5">
+                            <BlurFade delay={BLUR_FADE_DELAY}>
+                                {/* Avatar for mobile/tablet (hidden on md and up) */}
+                                <div className="md:hidden flex justify-center items-center">
+                                    <Avatar className="size-28 border">
+                                        <AvatarImage
+                                            alt={DATA.name}
+                                            src={"/me.png"}
+                                        />
+                                        <AvatarFallback>
+                                            {DATA.initials}
+                                        </AvatarFallback>
+                                    </Avatar>
+                                </div>
+                                {/* Image for desktop (hidden on screens smaller than md) */}
+                                <div className="hidden md:block">
+                                    <Image
+                                        src={DATA.avatarUrl}
+                                        alt={DATA.name}
+                                        width={1242}
+                                        height={2208}
+                                        className="h-auto w-[100%] rounded-lg"
+                                    />
+                                </div>
+                            </BlurFade>
+                        </div>
                     </div>
                 </div>
             </section>
-            <section id="about">
-                <BlurFade delay={BLUR_FADE_DELAY * 3}>
-                    <h2 className="text-xl font-bold">About</h2>
-                </BlurFade>
-                <BlurFade delay={BLUR_FADE_DELAY * 4}>
-                    <Markdown className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
-                        {DATA.summary}
-                    </Markdown>
-                </BlurFade>
-            </section>
+
             <section id="work">
                 <div className="flex min-h-0 flex-col gap-y-3">
                     <BlurFade delay={BLUR_FADE_DELAY * 5}>

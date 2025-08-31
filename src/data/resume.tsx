@@ -3,15 +3,15 @@ import { HomeIcon, NotebookIcon } from "lucide-react";
 
 export const DATA = {
     name: "Robert DeLucia",
+    nicknames: ["Bobby", "Bobbeh", "Bobert"],
     initials: "RD",
     url: "https://dillion.io",
     location: "Glendale, AZ",
     locationLink: "https://www.google.com/maps/place/glendaleaz",
-    description:
-        "Recent B.S. Computer Science graduate from Arizona State University. I love building websites everyone can use.",
+    description: "though people call me:",
     summary:
         "I’ve grown from playing Reader Rabbit in 1st grade to building my first computer at 13, and now to developing full-stack applications from the ground up. I explored a lot of routes in my time at ASU, such as data science and astrophysics, but I'm now focusing on building full-stack applications and websites. I have a soft spot for game development, I have made a few games in my time at ASU, with IDEs like Unity and GameMaker Studio. I also make a mean chicken parmesan [(check out my blog post about it)](/blog/bobbehs-chicken-parmesan). I use Arch btw",
-    avatarUrl: "/me.png",
+    avatarUrl: "/me.jpg",
     skills: [
         "React",
         "Next.js",
@@ -204,12 +204,12 @@ export const DATA = {
             video: "https://pub-dba825f56b6b4d059461fd476f2fdf10.r2.dev/psyche.mp4",
         },
         {
-            title: "Memory Game",
-            href: "https://odin-memory-game-ten.vercel.app/",
-            dates: "May 2025 - May 2025",
+            title: "Raspberry Pi Minecraft Server",
+            href: "https://dub.sh/bobbeh-mc-server",
+            dates: "January 2025 - Present",
             active: true,
             description:
-                "A simple React memory card game that uses the PokeAPI. Made during my beginning days learning React.",
+                "A private PaperMC server running on a Raspberry Pi that I use to play Minecraft with my friend. I wrote bash scripts to automatically restart the server when it crashes and to backup the world every week.",
             technologies: [
                 "React",
                 "JavaScript",
@@ -219,18 +219,13 @@ export const DATA = {
             ],
             links: [
                 {
-                    type: "Website",
+                    type: "3D map (may take a while to load)",
                     href: "https://odin-memory-game-ten.vercel.app/",
                     icon: <Icons.globe className="size-3" />,
                 },
-                {
-                    type: "Source",
-                    href: "https://dub.sh/bobbeh-memory-source",
-                    icon: <Icons.github className="size-3" />,
-                },
             ],
-            image: "",
-            video: "https://pub-dba825f56b6b4d059461fd476f2fdf10.r2.dev/memorygame.mp4",
+            image: "https://pub-22e36f870e1647a6a48e07c2fa9d9ae8.r2.dev/server.png",
+            video: "",
         },
     ],
 } as const;
