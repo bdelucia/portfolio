@@ -220,7 +220,7 @@ export const DATA = {
             links: [
                 {
                     type: "3D map (may take a while to load)",
-                    href: "https://odin-memory-game-ten.vercel.app/",
+                    href: "https://dub.sh/bobbeh-mc-server",
                     icon: <Icons.globe className="size-3" />,
                 },
             ],

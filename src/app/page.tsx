@@ -32,10 +32,24 @@ export default function Page() {
                 />
                 <section id="hero">
                     <div className="mx-auto w-full max-w-2xl sm:max-w-3xl lg:max-w-4xl space-y-8">
-                        <div className="gap-2 grid justify-between">
+                        <div className="gap-2 grid grid-cols-5 justify-between max-[460px]:flex max-[460px]:flex-col max-[460px]:gap-4">
+                            {/* Avatar for very small screens (above hero text) */}
+                            <div className="xs:hidden col-span-full row-start-1 row-span-1 flex justify-center items-center mb-4">
+                                <BlurFade delay={BLUR_FADE_DELAY}>
+                                    <Avatar className="size-20 border">
+                                        <AvatarImage
+                                            alt={DATA.name}
+                                            src={"/me.png"}
+                                        />
+                                        <AvatarFallback>
+                                            {DATA.initials}
+                                        </AvatarFallback>
+                                    </Avatar>
+                                </BlurFade>
+                            </div>
                             <section
                                 id="hero-text"
-                                className="col-span-3 row-span-1"
+                                className="col-span-3 row-start-0 row-span-1"
                             >
                                 <div className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
                                     Hi, I&apos;m{" "}
@@ -71,18 +85,18 @@ export default function Page() {
                                         🤌
                                     </motion.span>
                                 </div>
-                                <div className="flex items-center gap-2 sm:gap-3 flex-nowrap">
-                                    <span className="md:text-lg whitespace-nowrap">
+                                <div className="flex flex-col gap-0">
+                                    <span className="md:text-lg">
                                         {DATA.description}
                                     </span>
                                     <WordRotate
                                         words={[...DATA.nicknames]}
-                                        className="inline-block text-left w-20 sm:w-24 md:w-28 flex-shrink-0 md:text-lg"
+                                        className="inline text-left w-20 sm:w-24 md:w-28 md:text-lg leading-none"
                                         duration={3000}
                                     />
                                 </div>
                             </section>
-                            <div className="row-start-2 col-span-5 md:col-span-3 row-span-3">
+                            <div className="row-start-2 col-span-full xs:col-span-5 md:col-span-3 row-span-3 max-[460px]:row-start-auto max-[460px]:col-span-auto max-[460px]:row-span-auto">
                                 <section id="about">
                                     <BlurFade delay={BLUR_FADE_DELAY * 3}>
                                         <h2 className="text-xl font-bold">
@@ -96,10 +110,10 @@ export default function Page() {
                                     </BlurFade>
                                 </section>
                             </div>
-                            <div className="col-start-4 col-span-2 row-span-1 md:row-span-5">
+                            <div className="col-start-4 col-span-2 row-span-1 md:row-span-5 max-[460px]:col-start-auto max-[460px]:col-span-auto max-[460px]:row-span-auto">
                                 <BlurFade delay={BLUR_FADE_DELAY}>
-                                    {/* Avatar for mobile/tablet (hidden on md and up) */}
-                                    <div className="md:hidden flex justify-center items-center">
+                                    {/* Avatar for mobile/tablet (hidden on md and up, but only xs and up) */}
+                                    <div className="xs:flex md:hidden hidden justify-center items-center">
                                         <Avatar className="size-28 border">
                                             <AvatarImage
                                                 alt={DATA.name}
