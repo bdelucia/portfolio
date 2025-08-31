@@ -67,6 +67,7 @@
     .theme {
         --animate-meteor: meteor 5s linear infinite;
         --animate-aurora: aurora 8s ease-in-out infinite alternate;
+        --animate-shine: shine var(--duration) infinite linear;
     }
 }
 
@@ -181,6 +182,17 @@ code[data-line-numbers-max-digits="3"] > [data-line]::before {
   100% {
     background-position: 0% 50%;
     transform: rotate(-5deg) scale(0.9);
+        }
+    }
+  @keyframes shine {
+  0% {
+    background-position: 0% 0%;
+        }
+  50% {
+    background-position: 100% 100%;
+        }
+  to {
+    background-position: 0% 0%;
         }
     }
 }
