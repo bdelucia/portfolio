@@ -48,14 +48,20 @@ export const ResumeCard = ({
         >
             <Card className="flex bg-gray-50 dark:bg-gray-50/0">
                 <div className="flex-none bg-gray-50 dark:bg-gray-50/0">
-                    <Avatar className="border size-12 m-auto bg-muted-background dark:bg-foreground">
-                        <AvatarImage
-                            src={logoUrl}
-                            alt={altText}
-                            className="object-contain"
-                        />
-                        <AvatarFallback>{altText[0]}</AvatarFallback>
-                    </Avatar>
+                    <motion.div
+                        whileHover={{ scale: 1.2 }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                        className="m-auto"
+                    >
+                        <Avatar className="border size-12 bg-muted-background dark:bg-foreground">
+                            <AvatarImage
+                                src={logoUrl}
+                                alt={altText}
+                                className="object-contain"
+                            />
+                            <AvatarFallback>{altText[0]}</AvatarFallback>
+                        </Avatar>
+                    </motion.div>
                 </div>
                 <div className="flex-grow ml-4 items-center flex-col group">
                     <CardHeader>

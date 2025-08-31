@@ -16,6 +16,8 @@ import { AuroraText } from "@/components/magicui/aurora-text";
 import { ShineBorder } from "@/components/magicui/shine-border";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { Starfield } from "@/components/magicui/starfield";
+import { PerformanceMonitor } from "@/components/performance-monitor";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -46,6 +48,14 @@ export default function Page() {
 
     return (
         <main>
+            <PerformanceMonitor />
+            <Starfield />
+            {/* Light theme background */}
+            <div className="fixed inset-0 pointer-events-none dark:hidden">
+                <div className="w-full h-full bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50"></div>
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(120,119,198,0.1),transparent_50%)]"></div>
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(255,119,198,0.1),transparent_50%)]"></div>
+            </div>
             <div className="flex flex-col min-h-[100dvh] bg-gray-50 dark:bg-gray-50/10 space-y-10 max-w-2xl sm:max-w-3xl lg:max-w-4xl mx-4 sm:mx-auto my-12 box-border p-8 rounded-lg relative overflow-hidden">
                 <ShineBorder
                     key={effectiveTheme}
@@ -67,6 +77,7 @@ export default function Page() {
                                         <AvatarImage
                                             alt={DATA.name}
                                             src={"/me.png"}
+                                            loading="lazy"
                                         />
                                         <AvatarFallback>
                                             {DATA.initials}
@@ -152,6 +163,7 @@ export default function Page() {
                                             <AvatarImage
                                                 alt={DATA.name}
                                                 src={"/me.png"}
+                                                loading="lazy"
                                             />
                                             <AvatarFallback>
                                                 {DATA.initials}
@@ -163,9 +175,13 @@ export default function Page() {
                                         <Image
                                             src={DATA.avatarUrl}
                                             alt={DATA.name}
-                                            width={1242}
-                                            height={2208}
+                                            width={400}
+                                            height={600}
                                             className="h-auto w-[100%] rounded-lg"
+                                            priority={false}
+                                            loading="lazy"
+                                            sizes="(max-width: 1024px) 200px, 300px"
+                                            quality={85}
                                         />
                                     </div>
                                 </BlurFade>
