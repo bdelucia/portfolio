@@ -19,13 +19,18 @@ import { useTheme } from "next-themes";
 const BLUR_FADE_DELAY = 0.04;
 
 export default function Page() {
-    const theme = useTheme();
+    const { theme: currentTheme, resolvedTheme, systemTheme } = useTheme();
+
+    // Use resolvedTheme for consistent rendering, fallback to systemTheme
+    const effectiveTheme = resolvedTheme || systemTheme || "light";
+
     return (
         <main>
             <div className="flex flex-col min-h-[100dvh] bg-gray-50 dark:bg-gray-50/10 space-y-10 max-w-2xl sm:max-w-3xl lg:max-w-4xl mx-4 sm:mx-auto my-12 box-border p-8 rounded-lg relative overflow-hidden">
                 <ShineBorder
+                    key={effectiveTheme}
                     shineColor={
-                        theme.theme === "dark"
+                        effectiveTheme === "dark"
                             ? ["#A07CFE", "#FE8FB5", "#FFBE7B"]
                             : "gray"
                     }
@@ -49,61 +54,68 @@ export default function Page() {
                             </div>
                             <section
                                 id="hero-text"
-                                className="col-span-3 row-start-0 row-span-1"
+                                className="col-span-3 row-start-0 row-span-1 max-[460px]:text-center max-[460px]:flex max-[460px]:flex-col max-[460px]:items-center"
                             >
-                                <div className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                                    Hi, I&apos;m{" "}
-                                    {
-                                        <AuroraText>
-                                            {DATA.name.split(" ")[0]}
-                                        </AuroraText>
-                                    }{" "}
-                                    <motion.span
-                                        id="pinchedFingers"
-                                        className="inline-block"
-                                        style={{
-                                            transformOrigin: "left center",
-                                        }}
-                                        initial={{ rotate: 0, scale: 1 }}
-                                        animate={{
-                                            rotate: [0, -90, 0, -90, 0],
-                                            scale: [1, 1.05, 1, 1.05, 1],
-                                        }}
-                                        transition={{
-                                            duration: 0.8,
-                                            repeat: Infinity,
-                                            repeatDelay: 2,
-                                            ease: "easeOut",
-                                            times: [0, 0.2, 0.4, 0.6, 0.8],
-                                        }}
-                                        whileHover={{
-                                            rotate: [0, -90, 0],
-                                            scale: 1.1,
-                                            transition: { duration: 0.3 },
-                                        }}
-                                    >
-                                        🤌
-                                    </motion.span>
-                                </div>
-                                <div className="flex flex-col gap-0">
-                                    <span className="md:text-lg">
-                                        {DATA.description}
-                                    </span>
-                                    <WordRotate
-                                        words={[...DATA.nicknames]}
-                                        className="inline text-left w-20 sm:w-24 md:w-28 md:text-lg leading-none"
-                                        duration={3000}
-                                    />
-                                </div>
+                                <BlurFade delay={BLUR_FADE_DELAY * 4}>
+                                    <div className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
+                                        Hi, I&apos;m{" "}
+                                        {
+                                            <AuroraText>
+                                                {DATA.name.split(" ")[0]}
+                                            </AuroraText>
+                                        }{" "}
+                                        <motion.span
+                                            id="pinchedFingers"
+                                            className="inline-block"
+                                            style={{
+                                                transformOrigin: "left center",
+                                            }}
+                                            initial={{ rotate: 0, scale: 1 }}
+                                            animate={{
+                                                rotate: [0, -90, 0, -90, 0],
+                                                scale: [1, 1.05, 1, 1.05, 1],
+                                            }}
+                                            transition={{
+                                                duration: 0.8,
+                                                repeat: Infinity,
+                                                repeatDelay: 2,
+                                                ease: "easeOut",
+                                                times: [0, 0.2, 0.4, 0.6, 0.8],
+                                            }}
+                                            whileHover={{
+                                                rotate: [0, -90, 0],
+                                                scale: 1.1,
+                                                transition: { duration: 0.3 },
+                                            }}
+                                        >
+                                            {" "}
+                                            🤌
+                                        </motion.span>
+                                    </div>
+                                </BlurFade>
+                                <BlurFade delay={BLUR_FADE_DELAY * 2}>
+                                    <div className="flex flex-col gap-0 mt-2">
+                                        <span className="md:text-lg">
+                                            {DATA.description}
+                                        </span>
+                                        <BlurFade delay={BLUR_FADE_DELAY * 3}>
+                                            <WordRotate
+                                                words={[...DATA.nicknames]}
+                                                className="inline text-left w-20 sm:w-24 md:w-28 md:text-lg leading-none"
+                                                duration={3000}
+                                            />
+                                        </BlurFade>
+                                    </div>
+                                </BlurFade>
                             </section>
                             <div className="row-start-2 col-span-full xs:col-span-5 md:col-span-3 row-span-3 max-[460px]:row-start-auto max-[460px]:col-span-auto max-[460px]:row-span-auto">
                                 <section id="about">
-                                    <BlurFade delay={BLUR_FADE_DELAY * 3}>
+                                    <BlurFade delay={BLUR_FADE_DELAY * 2}>
                                         <h2 className="text-xl font-bold">
                                             About
                                         </h2>
                                     </BlurFade>
-                                    <BlurFade delay={BLUR_FADE_DELAY * 4}>
+                                    <BlurFade delay={BLUR_FADE_DELAY * 2}>
                                         <Markdown className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
                                             {DATA.summary}
                                         </Markdown>
