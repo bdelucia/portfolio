@@ -67,9 +67,9 @@ function BackToPortfolioButton() {
     return (
         <Tooltip>
             <TooltipTrigger asChild>
-                <Button className="bg-background">
+                <Button className="bg-background group">
                     <Link href="/" className="text-foreground">
-                        <ArrowLeftIcon className="h-4 w-4" />
+                        <ArrowLeftIcon className="h-4 w-4 group-hover:text-background" />
                     </Link>
                 </Button>
             </TooltipTrigger>
