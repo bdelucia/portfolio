@@ -12,6 +12,7 @@ import Markdown from "react-markdown";
 import Image from "next/image";
 import { WordRotate } from "@/components/magicui/word-rotate";
 import { motion } from "framer-motion";
+import { AuroraText } from "@/components/magicui/aurora-text";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -26,7 +27,12 @@ export default function Page() {
                             className="col-span-3 row-span-1"
                         >
                             <div className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                                Hi, I&apos;m {DATA.name.split(" ")[0]}{" "}
+                                Hi, I&apos;m{" "}
+                                {
+                                    <AuroraText>
+                                        {DATA.name.split(" ")[0]}
+                                    </AuroraText>
+                                }{" "}
                                 <motion.span
                                     id="pinchedFingers"
                                     className="inline-block"
@@ -65,7 +71,7 @@ export default function Page() {
                                 />
                             </div>
                         </section>
-                        <div className="row-start-2 col-span-2 md:col-span-3 row-span-3">
+                        <div className="row-start-2 col-span-5 md:col-span-3 row-span-3">
                             <section id="about">
                                 <BlurFade delay={BLUR_FADE_DELAY * 3}>
                                     <h2 className="text-xl font-bold">About</h2>

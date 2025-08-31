@@ -10,7 +10,7 @@ export const DATA = {
     locationLink: "https://www.google.com/maps/place/glendaleaz",
     description: "though people call me:",
     summary:
-        "I’ve grown from playing Reader Rabbit in 1st grade to building my first computer at 13, and now to developing full-stack applications from the ground up. I explored a lot of routes in my time at ASU, such as data science and astrophysics, but I'm now focusing on building full-stack applications and websites. I have a soft spot for game development, I have made a few games in my time at ASU, with IDEs like Unity and GameMaker Studio. I also make a mean chicken parmesan [(check out my blog post about it)](/blog/bobbehs-chicken-parmesan). I use Arch btw",
+        "I’ve grown from playing Reader Rabbit in 1st grade to building my first computer at 13, and now to developing full-stack applications from the ground up. I explored a lot of routes in my time at ASU, such as data science and astrophysics, but I'm now focusing on building full-stack applications and websites. I have a soft spot for game development, I have made a few games in my time at ASU, with IDEs like Unity and GameMaker Studio. I also make a mean chicken parmesan [(check out my blog post about it)](/blog/bobbehs-chicken-parmesan). I use Arch btw. ",
     avatarUrl: "/me.jpg",
     skills: [
         "React",
