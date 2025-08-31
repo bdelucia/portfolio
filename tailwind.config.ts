@@ -74,10 +74,45 @@ const config = {
                     from: { height: "var(--radix-accordion-content-height)" },
                     to: { height: "0" },
                 },
+                aurora: {
+                    "0%": {
+                        "background-position": "0% 50%",
+                        transform: "rotate(-5deg) scale(0.9)",
+                    },
+                    "25%": {
+                        "background-position": "50% 100%",
+                        transform: "rotate(5deg) scale(1.1)",
+                    },
+                    "50%": {
+                        "background-position": "100% 50%",
+                        transform: "rotate(-3deg) scale(0.95)",
+                    },
+                    "75%": {
+                        "background-position": "50% 0%",
+                        transform: "rotate(3deg) scale(1.05)",
+                    },
+                    "100%": {
+                        "background-position": "0% 50%",
+                        transform: "rotate(-5deg) scale(0.9)",
+                    },
+                },
+                shine: {
+                    "0%": {
+                        "background-position": "0% 0%",
+                    },
+                    "50%": {
+                        "background-position": "100% 100%",
+                    },
+                    to: {
+                        "background-position": "0% 0%",
+                    },
+                },
             },
             animation: {
                 "accordion-down": "accordion-down 0.2s ease-out",
                 "accordion-up": "accordion-up 0.2s ease-out",
+                aurora: "aurora 8s ease-in-out infinite alternate",
+                shine: "shine var(--duration) infinite linear",
             },
         },
     },
