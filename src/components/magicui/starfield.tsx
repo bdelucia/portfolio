@@ -2,6 +2,7 @@
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { useAnimations } from "@/contexts/AnimationContext";
 
 interface Star {
     id: number;
@@ -15,6 +16,7 @@ interface Star {
 
 export function Starfield() {
     const { resolvedTheme } = useTheme();
+    const { animationsEnabled } = useAnimations();
     const [stars, setStars] = useState<Star[]>([]);
 
     useEffect(() => {
@@ -55,7 +57,9 @@ export function Starfield() {
             {stars.map((star) => (
                 <div
                     key={star.id}
-                    className="absolute w-1 h-1 bg-white rounded-full animate-pulse"
+                    className={`absolute w-1 h-1 bg-white rounded-full ${
+                        animationsEnabled ? "animate-pulse" : ""
+                    }`}
                     style={{
                         left: `${star.x}%`,
                         top: `${star.y}%`,

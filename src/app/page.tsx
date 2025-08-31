@@ -18,11 +18,13 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Starfield } from "@/components/magicui/starfield";
 import { PerformanceMonitor } from "@/components/performance-monitor";
+import { useAnimations } from "@/contexts/AnimationContext";
 
 const BLUR_FADE_DELAY = 0.04;
 
 export default function Page() {
     const { theme: currentTheme, resolvedTheme, systemTheme } = useTheme();
+    const { animationsEnabled } = useAnimations();
     const [mounted, setMounted] = useState(false);
 
     // Use resolvedTheme for consistent rendering, fallback to systemTheme
@@ -104,22 +106,44 @@ export default function Page() {
                                                 transformOrigin: "left center",
                                             }}
                                             initial={{ rotate: 0, scale: 1 }}
-                                            animate={{
-                                                rotate: [0, -90, 0, -90, 0],
-                                                scale: [1, 1.05, 1, 1.05, 1],
-                                            }}
-                                            transition={{
-                                                duration: 0.8,
-                                                repeat: Infinity,
-                                                repeatDelay: 2,
-                                                ease: "easeOut",
-                                                times: [0, 0.2, 0.4, 0.6, 0.8],
-                                            }}
-                                            whileHover={{
-                                                rotate: [0, -90, 0],
-                                                scale: 1.1,
-                                                transition: { duration: 0.3 },
-                                            }}
+                                            animate={
+                                                animationsEnabled
+                                                    ? {
+                                                          rotate: [
+                                                              0, -90, 0, -90, 0,
+                                                          ],
+                                                          scale: [
+                                                              1, 1.05, 1, 1.05,
+                                                              1,
+                                                          ],
+                                                      }
+                                                    : { rotate: 0, scale: 1 }
+                                            }
+                                            transition={
+                                                animationsEnabled
+                                                    ? {
+                                                          duration: 0.8,
+                                                          repeat: Infinity,
+                                                          repeatDelay: 2,
+                                                          ease: "easeOut",
+                                                          times: [
+                                                              0, 0.2, 0.4, 0.6,
+                                                              0.8,
+                                                          ],
+                                                      }
+                                                    : {}
+                                            }
+                                            whileHover={
+                                                animationsEnabled
+                                                    ? {
+                                                          rotate: [0, -90, 0],
+                                                          scale: 1.1,
+                                                          transition: {
+                                                              duration: 0.3,
+                                                          },
+                                                      }
+                                                    : {}
+                                            }
                                         >
                                             {" "}
                                             🤌

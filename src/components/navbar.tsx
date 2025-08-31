@@ -1,5 +1,6 @@
 import { Dock, DockIcon } from "@/components/magicui/dock";
 import { ModeToggle } from "@/components/mode-toggle";
+import { AnimationToggle } from "@/components/animation-toggle";
 import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -25,7 +26,7 @@ export default function Navbar() {
                             ? ["#A07CFE", "#FE8FB5", "#FFBE7B"]
                             : "white"
                     }
-                    borderWidth={2}
+                    borderWidth={3}
                 />
                 {DATA.navbar.map((item) => (
                     <DockIcon key={item.href}>
@@ -77,9 +78,19 @@ export default function Navbar() {
                         </DockIcon>
                     ))}
                 <Separator orientation="vertical" className="h-full py-2" />
-                <DockIcon>
+                <DockIcon key="animations">
                     <Tooltip>
-                        <TooltipTrigger asChild>
+                        <TooltipTrigger>
+                            <AnimationToggle />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>Toggle Animations</p>
+                        </TooltipContent>
+                    </Tooltip>
+                </DockIcon>
+                <DockIcon key="theme">
+                    <Tooltip>
+                        <TooltipTrigger>
                             <ModeToggle />
                         </TooltipTrigger>
                         <TooltipContent>

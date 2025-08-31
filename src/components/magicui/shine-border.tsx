@@ -3,6 +3,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { useAnimations } from "@/contexts/AnimationContext";
 
 interface ShineBorderProps extends React.HTMLAttributes<HTMLDivElement> {
     /**
@@ -35,6 +36,8 @@ export function ShineBorder({
     style,
     ...props
 }: ShineBorderProps) {
+    const { animationsEnabled } = useAnimations();
+
     return (
         <div
             style={
@@ -56,7 +59,8 @@ export function ShineBorder({
                 } as React.CSSProperties
             }
             className={cn(
-                "pointer-events-none absolute inset-0 size-full rounded-[inherit] will-change-[background-position] motion-safe:animate-shine",
+                "pointer-events-none absolute inset-0 size-full rounded-[inherit] will-change-[background-position]",
+                animationsEnabled && "motion-safe:animate-shine",
                 className
             )}
             {...props}

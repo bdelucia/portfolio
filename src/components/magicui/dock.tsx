@@ -48,8 +48,13 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
         return (
             <motion.div
                 ref={ref}
-                onMouseMove={(e) => mousex.set(e.pageX)}
-                onMouseLeave={() => mousex.set(Infinity)}
+                onPointerMove={(e) => {
+                    // Only track mouse for dock magnification, not for buttons
+                    if (!(e.target as Element).closest("button")) {
+                        mousex.set(e.pageX);
+                    }
+                }}
+                onPointerLeave={() => mousex.set(Infinity)}
                 {...props}
                 className={cn(dockVariants({ className }))}
             >

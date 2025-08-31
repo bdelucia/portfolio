@@ -1,22 +1,36 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { useTheme } from "next-themes";
+import { cn } from "@/lib/utils";
+import { forwardRef } from "react";
 
-export function ModeToggle() {
+export const ModeToggle = forwardRef<HTMLButtonElement, {}>((props, ref) => {
     const { theme, setTheme } = useTheme();
 
     return (
-        <Button
-            variant="ghost"
+        <button
+            ref={ref}
             type="button"
-            size="icon"
-            className="px-2 group"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className={cn(
+                buttonVariants({
+                    variant: "ghost",
+                    size: "icon",
+                }),
+                "size-12 text-background"
+            )}
+            onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setTheme(theme === "dark" ? "light" : "dark");
+            }}
+            {...props}
         >
-            <SunIcon className="h-[1.2rem] w-[1.2rem] text-background group-hover:text-foreground dark:hidden dark:text-neutral-200 dark:group-hover:text-background" />
-            <MoonIcon className="hidden h-[1.2rem] w-[1.2rem] text-background group-hover:text-foreground dark:block dark:text-background dark:group-hover:text-neutral-200" />
-        </Button>
+            <SunIcon className="h-4 w-4 dark:hidden" />
+            <MoonIcon className="hidden h-4 w-4 dark:block" />
+        </button>
     );
-}
+});
+
+ModeToggle.displayName = "ModeToggle";
