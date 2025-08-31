@@ -211,11 +211,10 @@ export const DATA = {
             description:
                 "A private PaperMC server running on a Raspberry Pi that I use to play Minecraft with my friend. I wrote bash scripts to automatically restart the server when it crashes and to backup the world every week.",
             technologies: [
-                "React",
-                "JavaScript",
-                "DaisyUI",
-                "react-card-flip",
-                "Vercel",
+                "Raspberry Pi",
+                "Debian OS",
+                "DNS Configuration",
+                "Bash Scripts",
             ],
             links: [
                 {
