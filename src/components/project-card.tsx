@@ -1,3 +1,5 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import {
     Card,
@@ -7,9 +9,12 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
+import { ChevronRightIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import Markdown from "react-markdown";
+import React from "react";
 
 interface Props {
     title: string;
@@ -40,6 +45,14 @@ export function ProjectCard({
     links,
     className,
 }: Props) {
+    const [isExpanded, setIsExpanded] = React.useState(false);
+
+    const handleExpandClick = (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setIsExpanded(!isExpanded);
+    };
+
     return (
         <Card
             className={
@@ -76,7 +89,22 @@ export function ProjectCard({
             </Link>
             <CardHeader className="px-2">
                 <div className="space-y-1">
-                    <CardTitle className="mt-1 text-base">{title}</CardTitle>
+                    <div className="flex items-center justify-between">
+                        <CardTitle className="mt-1 text-base">
+                            {title}
+                        </CardTitle>
+                        <button
+                            onClick={handleExpandClick}
+                            className="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors"
+                        >
+                            <ChevronRightIcon
+                                className={cn(
+                                    "size-4 transition-transform duration-300 ease-out",
+                                    isExpanded ? "rotate-90" : "rotate-0"
+                                )}
+                            />
+                        </button>
+                    </div>
                     <time className="font-sans text-xs">{dates}</time>
                     <div className="hidden font-sans text-xs underline print:visible">
                         {link
@@ -84,14 +112,38 @@ export function ProjectCard({
                             .replace("www.", "")
                             .replace("/", "")}
                     </div>
-                    <Markdown className="prose max-w-full text-pretty font-sans text-xs text-muted-foreground dark:prose-invert">
-                        {description}
-                    </Markdown>
+                    <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{
+                            opacity: isExpanded ? 1 : 0,
+                            height: isExpanded ? "auto" : 0,
+                        }}
+                        transition={{
+                            duration: 0.3,
+                            ease: [0.16, 1, 0.3, 1],
+                        }}
+                        className="overflow-hidden"
+                    >
+                        <Markdown className="prose max-w-full text-pretty font-sans text-xs text-muted-foreground dark:prose-invert">
+                            {description}
+                        </Markdown>
+                    </motion.div>
                 </div>
             </CardHeader>
             <CardContent className="mt-auto flex flex-col px-2">
                 {tags && tags.length > 0 && (
-                    <div className="mt-2 flex flex-wrap gap-1">
+                    <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{
+                            opacity: isExpanded ? 1 : 0,
+                            height: isExpanded ? "auto" : 0,
+                        }}
+                        transition={{
+                            duration: 0.3,
+                            ease: [0.16, 1, 0.3, 1],
+                        }}
+                        className="mt-2 flex flex-wrap gap-1 overflow-hidden"
+                    >
                         {tags?.map((tag) => (
                             <Badge
                                 className="px-1 py-0 text-[10px]"
@@ -101,7 +153,7 @@ export function ProjectCard({
                                 {tag}
                             </Badge>
                         ))}
-                    </div>
+                    </motion.div>
                 )}
             </CardContent>
             <CardFooter className="px-2 pb-2">

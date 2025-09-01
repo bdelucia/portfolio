@@ -343,7 +343,15 @@ export default function Page() {
                                     >
                                         with a direct question on LinkedIn
                                     </Link>{" "}
-                                    and I&apos;ll respond whenever I can.
+                                    or email me at{" "}
+                                    <Link
+                                        href={`mailto:${DATA.contact.email}`}
+                                        className="text-blue-500 hover:underline"
+                                    >
+                                        {DATA.contact.email}
+                                    </Link>
+                                    . I read every message sent to me and try to
+                                    respond as soon as possible.
                                 </p>
                             </div>
                         </BlurFade>
