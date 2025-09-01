@@ -41,8 +41,14 @@ export default function BlogCarousel({ images = [] }: BlogCarouselProps) {
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                <CarouselPrevious className="bg-foreground text-background hover:bg-foreground/90 max-[520px]:-left-2" />
-                <CarouselNext className="bg-foreground text-background hover:bg-foreground/90 max-[520px]:-right-2" />
+                <CarouselPrevious
+                    variant="default"
+                    className="bg-foreground text-background hover:bg-background hover:text-foreground max-[520px]:-left-2"
+                />
+                <CarouselNext
+                    variant="default"
+                    className="bg-foreground text-background hover:bg-background hover:text-foreground max-[520px]:-right-2"
+                />
             </Carousel>
         </div>
     );
