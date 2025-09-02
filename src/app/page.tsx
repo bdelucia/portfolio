@@ -19,6 +19,9 @@ import { useEffect, useState } from "react";
 import { Starfield } from "@/components/magicui/starfield";
 import { PerformanceMonitor } from "@/components/performance-monitor";
 import { useAnimations } from "@/contexts/AnimationContext";
+import { IconCloud } from "@/components/magicui/icon-cloud";
+import { Switch } from "@/components/ui/switch";
+import { Icons } from "@/components/icons";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -26,9 +29,34 @@ export default function Page() {
     const { theme: currentTheme, resolvedTheme, systemTheme } = useTheme();
     const { animationsEnabled } = useAnimations();
     const [mounted, setMounted] = useState(false);
+    const [showIconCloud, setShowIconCloud] = useState(true);
 
     // Use resolvedTheme for consistent rendering, fallback to systemTheme
     const effectiveTheme = resolvedTheme || systemTheme || "light";
+
+    // List of technology slugs for the icon cloud
+    const slugs = [
+        "react",
+        "nextdotjs",
+        "javascript",
+        "shadcnui",
+        "typescript",
+        "nodedotjs",
+        "python",
+        "postgresql",
+        "docker",
+        "cplusplus",
+        "dotnet",
+        "archlinux",
+        "linux",
+        "github",
+        "vite",
+    ];
+
+    // Generate icon URLs from the slugs
+    const skillIconUrls = slugs.map(
+        (slug) => `https://cdn.simpleicons.org/${slug}/${slug}`
+    );
 
     // Prevent hydration mismatch by only rendering after mount
     useEffect(() => {
@@ -269,23 +297,50 @@ export default function Page() {
                 <section id="skills">
                     <div className="flex min-h-0 flex-col gap-y-3">
                         <BlurFade delay={BLUR_FADE_DELAY * 9}>
-                            <h2 className="text-xl font-bold">Skills</h2>
+                            <div className="flex items-center justify-between">
+                                <h2 className="text-xl font-bold">Skills</h2>
+                                <div className="flex items-center gap-2">
+                                    <span className="text-sm text-muted-foreground">
+                                        Icon Cloud
+                                    </span>
+                                    <Switch
+                                        checked={!showIconCloud}
+                                        onCheckedChange={(checked) =>
+                                            setShowIconCloud(!checked)
+                                        }
+                                        aria-label="Toggle between icon cloud and badges view"
+                                    />
+                                    <span className="text-sm text-muted-foreground">
+                                        Badges
+                                    </span>
+                                </div>
+                            </div>
                         </BlurFade>
-                        <div className="flex flex-wrap gap-1">
-                            {DATA.skills.map((skill, id) => (
-                                <BlurFade
-                                    key={skill}
-                                    delay={BLUR_FADE_DELAY * 10 + id * 0.05}
-                                >
-                                    <Badge key={skill}>{skill}</Badge>
-                                </BlurFade>
-                            ))}
-                        </div>
+                        <BlurFade delay={BLUR_FADE_DELAY * 10}>
+                            {showIconCloud ? (
+                                <div className="flex justify-center">
+                                    <IconCloud images={skillIconUrls} />
+                                </div>
+                            ) : (
+                                <div className="flex flex-wrap gap-1 justify-center w-[50%] mx-auto">
+                                    {DATA.skills.map((skill, id) => (
+                                        <BlurFade
+                                            key={skill}
+                                            delay={
+                                                BLUR_FADE_DELAY * 11 + id * 0.05
+                                            }
+                                        >
+                                            <Badge key={skill}>{skill}</Badge>
+                                        </BlurFade>
+                                    ))}
+                                </div>
+                            )}
+                        </BlurFade>
                     </div>
                 </section>
                 <section id="projects">
                     <div className="space-y-12 w-full py-12">
-                        <BlurFade delay={BLUR_FADE_DELAY * 11}>
+                        <BlurFade delay={BLUR_FADE_DELAY * 12}>
                             <div className="flex flex-col items-center justify-center space-y-4 text-center">
                                 <div className="space-y-2">
                                     <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
@@ -307,7 +362,7 @@ export default function Page() {
                             {DATA.projects.map((project, id) => (
                                 <BlurFade
                                     key={project.title}
-                                    delay={BLUR_FADE_DELAY * 12 + id * 0.05}
+                                    delay={BLUR_FADE_DELAY * 13 + id * 0.05}
                                 >
                                     <ProjectCard
                                         href={project.href}
@@ -327,7 +382,7 @@ export default function Page() {
                 </section>
                 <section id="contact">
                     <div className="grid items-center justify-center gap-4 px-4 text-center md:px-6 w-full py-12">
-                        <BlurFade delay={BLUR_FADE_DELAY * 16}>
+                        <BlurFade delay={BLUR_FADE_DELAY * 17}>
                             <div className="space-y-3">
                                 <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
                                     Contact

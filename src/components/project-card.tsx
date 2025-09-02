@@ -15,6 +15,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Markdown from "react-markdown";
 import React from "react";
+import { ShinyButton } from "./magicui/shiny-button";
 
 interface Props {
     title: string;
