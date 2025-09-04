@@ -27,9 +27,8 @@ const BLUR_FADE_DELAY = 0.04;
 
 export default function Page() {
     const { theme: currentTheme, resolvedTheme, systemTheme } = useTheme();
-    const { animationsEnabled } = useAnimations();
+    const { animationsEnabled, toggleAnimations } = useAnimations();
     const [mounted, setMounted] = useState(false);
-    const [showIconCloud, setShowIconCloud] = useState(true);
 
     // Use resolvedTheme for consistent rendering, fallback to systemTheme
     const effectiveTheme = resolvedTheme || systemTheme || "light";
@@ -86,6 +85,10 @@ export default function Page() {
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(120,119,198,0.1),transparent_50%)]"></div>
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(255,119,198,0.1),transparent_50%)]"></div>
             </div>
+            {/* Mobile navbar - positioned at top for better tab order */}
+            <div className="max-[460px]:block hidden">
+                <Navbar />
+            </div>
             <div className="flex flex-col min-h-[100dvh] bg-gray-50 dark:bg-gray-50/10 space-y-10 max-w-2xl sm:max-w-3xl lg:max-w-4xl mx-4 sm:mx-auto my-12 box-border p-8 rounded-lg relative overflow-hidden">
                 <ShineBorder
                     key={effectiveTheme}
@@ -101,11 +104,15 @@ export default function Page() {
                     <div className="mx-auto w-full max-w-2xl sm:max-w-3xl lg:max-w-4xl space-y-8">
                         <div className="gap-2 grid grid-cols-5 justify-between max-[460px]:flex max-[460px]:flex-col max-[460px]:gap-4">
                             {/* Avatar for very small screens (above hero text) */}
-                            <div className="xs:hidden col-span-full row-start-1 row-span-1 flex justify-center items-center mb-4">
+                            <div
+                                className="xs:hidden col-span-full row-start-1 row-span-1 flex justify-center items-center mb-4"
+                                tabIndex={0}
+                                aria-label={`${DATA.name} profile picture`}
+                            >
                                 <BlurFade delay={BLUR_FADE_DELAY}>
                                     <Avatar className="size-20 border">
                                         <AvatarImage
-                                            alt={DATA.name}
+                                            alt={`${DATA.name} profile picture`}
                                             src={"/me.png"}
                                             loading="lazy"
                                         />
@@ -118,15 +125,38 @@ export default function Page() {
                             <section
                                 id="hero-text"
                                 className="col-span-3 row-start-0 row-span-1 max-[460px]:text-center max-[460px]:flex max-[460px]:flex-col max-[460px]:items-center"
+                                aria-labelledby="hero-heading"
+                                role="banner"
                             >
                                 <BlurFade delay={BLUR_FADE_DELAY * 4}>
-                                    <div className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                                        Hi, I&apos;m{" "}
-                                        {
+                                    <h1
+                                        id="hero-heading"
+                                        className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none"
+                                        tabIndex={0}
+                                        aria-label={`Hi, I'm ${
+                                            DATA.name.split(" ")[0]
+                                        }, with a pinched fingers emoji`}
+                                    >
+                                        <button
+                                            className="inline-block text-left bg-transparent border-none p-0 m-0 cursor-default focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded mr-2"
+                                            tabIndex={0}
+                                            aria-label="Greeting: Hi, I'm"
+                                            type="button"
+                                        >
+                                            Hi, I&apos;m{" "}
+                                        </button>
+                                        <span
+                                            className="inline-block mr-2"
+                                            tabIndex={0}
+                                            aria-label={`${
+                                                DATA.name.split(" ")[0]
+                                            }, my first name`}
+                                            role="text"
+                                        >
                                             <AuroraText>
                                                 {DATA.name.split(" ")[0]}
                                             </AuroraText>
-                                        }{" "}
+                                        </span>
                                         <motion.span
                                             id="pinchedFingers"
                                             className="inline-block"
@@ -172,48 +202,84 @@ export default function Page() {
                                                       }
                                                     : {}
                                             }
+                                            aria-label="Pinched fingers emoji"
+                                            role="img"
+                                            tabIndex={0}
                                         >
-                                            {" "}
                                             🤌
                                         </motion.span>
-                                    </div>
+                                    </h1>
                                 </BlurFade>
                                 <BlurFade delay={BLUR_FADE_DELAY * 2}>
                                     <div className="flex flex-col gap-0 mt-2">
-                                        <span className="md:text-lg">
+                                        <p
+                                            className="md:text-lg"
+                                            tabIndex={0}
+                                            aria-label={`Professional description: ${DATA.description}`}
+                                        >
                                             {DATA.description}
-                                        </span>
+                                        </p>
                                         <BlurFade delay={BLUR_FADE_DELAY * 3}>
-                                            <WordRotate
-                                                words={[...DATA.nicknames]}
-                                                className="inline text-left w-20 sm:w-24 md:w-28 md:text-lg leading-none"
-                                                duration={3000}
-                                            />
+                                            <div
+                                                tabIndex={0}
+                                                aria-label={`Nicknames: ${DATA.nicknames.join(
+                                                    ", "
+                                                )}`}
+                                                role="text"
+                                            >
+                                                <WordRotate
+                                                    words={[...DATA.nicknames]}
+                                                    className="inline text-left w-20 sm:w-24 md:w-28 md:text-lg leading-none"
+                                                    duration={3000}
+                                                />
+                                            </div>
                                         </BlurFade>
                                     </div>
                                 </BlurFade>
                             </section>
                             <div className="row-start-2 col-span-full xs:col-span-5 md:col-span-3 row-span-3 max-[460px]:row-start-auto max-[460px]:col-span-auto max-[460px]:row-span-auto">
-                                <section id="about">
+                                <section
+                                    id="about"
+                                    aria-labelledby="about-heading"
+                                    role="region"
+                                >
                                     <BlurFade delay={BLUR_FADE_DELAY * 2}>
-                                        <h2 className="text-xl font-bold">
+                                        <h2
+                                            id="about-heading"
+                                            className="text-xl font-bold"
+                                            tabIndex={0}
+                                        >
                                             About
                                         </h2>
                                     </BlurFade>
                                     <BlurFade delay={BLUR_FADE_DELAY * 2}>
-                                        <Markdown className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
-                                            {DATA.summary}
-                                        </Markdown>
+                                        <div
+                                            tabIndex={0}
+                                            aria-label="About me summary"
+                                            role="article"
+                                        >
+                                            <Markdown className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
+                                                {DATA.summary}
+                                            </Markdown>
+                                        </div>
                                     </BlurFade>
                                 </section>
                             </div>
-                            <div className="col-start-4 col-span-2 row-span-1 md:row-span-5 max-[460px]:col-start-auto max-[460px]:col-span-auto max-[460px]:row-span-auto">
+                            <div
+                                className="col-start-4 col-span-2 row-span-1 md:row-span-5 max-[460px]:col-start-auto max-[460px]:col-span-auto max-[460px]:row-span-auto"
+                                role="complementary"
+                                aria-label="Profile image"
+                            >
                                 <BlurFade delay={BLUR_FADE_DELAY}>
                                     {/* Avatar for mobile/tablet (hidden on md and up, but only xs and up) */}
-                                    <div className="xs:flex md:hidden hidden justify-center items-center">
+                                    <div
+                                        className="xs:flex md:hidden hidden justify-center items-center"
+                                        tabIndex={0}
+                                        aria-label={`${DATA.name} profile picture`}
+                                    >
                                         <Avatar className="size-28 border">
                                             <AvatarImage
-                                                alt={DATA.name}
+                                                alt={`${DATA.name} profile picture`}
                                                 src={"/me.png"}
                                                 loading="lazy"
                                             />
@@ -223,10 +289,14 @@ export default function Page() {
                                         </Avatar>
                                     </div>
                                     {/* Image for desktop (hidden on screens smaller than md) */}
-                                    <div className="hidden md:block">
+                                    <div
+                                        className="hidden md:block"
+                                        tabIndex={0}
+                                        aria-label={`${DATA.name} profile image`}
+                                    >
                                         <Image
                                             src={DATA.avatarUrl}
-                                            alt={DATA.name}
+                                            alt={`${DATA.name} profile image`}
                                             width={400}
                                             height={600}
                                             className="h-auto w-[100%] rounded-lg"
@@ -242,10 +312,15 @@ export default function Page() {
                     </div>
                 </section>
 
-                <section id="work">
+                <section id="work" aria-labelledby="work-heading" role="region">
                     <div className="flex min-h-0 flex-col gap-y-3">
                         <BlurFade delay={BLUR_FADE_DELAY * 5}>
-                            <h2 className="text-xl font-bold">
+                            <h2
+                                id="work-heading"
+                                className="text-xl font-bold"
+                                tabIndex={0}
+                                aria-label="Work Experience section"
+                            >
                                 Work Experience
                             </h2>
                         </BlurFade>
@@ -271,10 +346,21 @@ export default function Page() {
                         ))}
                     </div>
                 </section>
-                <section id="education">
+                <section
+                    id="education"
+                    aria-labelledby="education-heading"
+                    role="region"
+                >
                     <div className="flex min-h-0 flex-col gap-y-3">
                         <BlurFade delay={BLUR_FADE_DELAY * 7}>
-                            <h2 className="text-xl font-bold">Education</h2>
+                            <h2
+                                id="education-heading"
+                                className="text-xl font-bold"
+                                tabIndex={0}
+                                aria-label="Education section"
+                            >
+                                Education
+                            </h2>
                         </BlurFade>
                         {DATA.education.map((education, id) => (
                             <BlurFade
@@ -294,20 +380,31 @@ export default function Page() {
                         ))}
                     </div>
                 </section>
-                <section id="skills">
+                <section
+                    id="skills"
+                    aria-labelledby="skills-heading"
+                    role="region"
+                >
                     <div className="flex min-h-0 flex-col gap-y-3">
                         <BlurFade delay={BLUR_FADE_DELAY * 9}>
                             <div className="flex items-center justify-between">
-                                <h2 className="text-xl font-bold">Skills</h2>
+                                <h2
+                                    id="skills-heading"
+                                    className="text-xl font-bold"
+                                    tabIndex={0}
+                                    aria-label="Skills section"
+                                >
+                                    Skills
+                                </h2>
                                 <div className="flex items-center gap-2">
                                     <span className="text-sm text-muted-foreground">
                                         Icon Cloud
                                     </span>
                                     <Switch
-                                        checked={!showIconCloud}
-                                        onCheckedChange={(checked) =>
-                                            setShowIconCloud(!checked)
-                                        }
+                                        checked={!animationsEnabled}
+                                        onCheckedChange={(checked) => {
+                                            toggleAnimations();
+                                        }}
                                         aria-label="Toggle between icon cloud and badges view"
                                     />
                                     <span className="text-sm text-muted-foreground">
@@ -317,12 +414,16 @@ export default function Page() {
                             </div>
                         </BlurFade>
                         <BlurFade delay={BLUR_FADE_DELAY * 10}>
-                            {showIconCloud ? (
+                            {animationsEnabled ? (
                                 <div className="flex justify-center">
                                     <IconCloud images={skillIconUrls} />
                                 </div>
                             ) : (
-                                <div className="flex flex-wrap gap-1 justify-center w-[50%] mx-auto">
+                                <div
+                                    className="flex flex-wrap gap-1 justify-center w-[50%] mx-auto"
+                                    role="list"
+                                    aria-label="Technical skills list"
+                                >
                                     {DATA.skills.map((skill, id) => (
                                         <BlurFade
                                             key={skill}
@@ -330,7 +431,16 @@ export default function Page() {
                                                 BLUR_FADE_DELAY * 11 + id * 0.05
                                             }
                                         >
-                                            <Badge key={skill}>{skill}</Badge>
+                                            <div
+                                                role="listitem"
+                                                tabIndex={0}
+                                                aria-label={`Skill: ${skill}`}
+                                                className="focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
+                                            >
+                                                <Badge key={skill}>
+                                                    {skill}
+                                                </Badge>
+                                            </div>
                                         </BlurFade>
                                     ))}
                                 </div>
@@ -338,18 +448,36 @@ export default function Page() {
                         </BlurFade>
                     </div>
                 </section>
-                <section id="projects">
+                <section
+                    id="projects"
+                    aria-labelledby="projects-heading"
+                    role="region"
+                >
                     <div className="space-y-12 w-full py-12">
                         <BlurFade delay={BLUR_FADE_DELAY * 12}>
                             <div className="flex flex-col items-center justify-center space-y-4 text-center">
                                 <div className="space-y-2">
-                                    <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
+                                    <div
+                                        className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm"
+                                        tabIndex={0}
+                                        aria-label="Section badge: My Projects"
+                                        role="text"
+                                    >
                                         My Projects
                                     </div>
-                                    <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                                    <h2
+                                        id="projects-heading"
+                                        className="text-3xl font-bold tracking-tighter sm:text-5xl"
+                                        tabIndex={0}
+                                        aria-label="Projects section: Check out my latest work"
+                                    >
                                         Check out my latest work
                                     </h2>
-                                    <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                                    <p
+                                        className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed"
+                                        tabIndex={0}
+                                        aria-label="Projects description: I've worked on a variety of projects, from simple websites to complex web applications. Here are a few of my most recent."
+                                    >
                                         I&apos;ve worked on a variety of
                                         projects, from simple websites to
                                         complex web applications. Here are a few
@@ -380,17 +508,35 @@ export default function Page() {
                         </div>
                     </div>
                 </section>
-                <section id="contact">
+                <section
+                    id="contact"
+                    aria-labelledby="contact-heading"
+                    role="region"
+                >
                     <div className="grid items-center justify-center gap-4 px-4 text-center md:px-6 w-full py-12">
                         <BlurFade delay={BLUR_FADE_DELAY * 17}>
                             <div className="space-y-3">
-                                <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
+                                <div
+                                    className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm"
+                                    tabIndex={0}
+                                    aria-label="Section badge: Contact"
+                                    role="text"
+                                >
                                     Contact
                                 </div>
-                                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
+                                <h2
+                                    id="contact-heading"
+                                    className="text-3xl font-bold tracking-tighter sm:text-5xl"
+                                    tabIndex={0}
+                                    aria-label="Contact section"
+                                >
                                     Get in Touch
                                 </h2>
-                                <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                                <p
+                                    className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed"
+                                    tabIndex={0}
+                                    aria-label={`Contact description: Want to chat? Just shoot me a DM with a direct question on LinkedIn or email me at ${DATA.contact.email}. I read every message sent to me and try to respond as soon as possible.`}
+                                >
                                     Want to chat? Just shoot me a DM{" "}
                                     <Link
                                         href={DATA.contact.social.LinkedIn.url}
@@ -413,7 +559,10 @@ export default function Page() {
                     </div>
                 </section>
             </div>
-            <Navbar />
+            {/* Desktop navbar - positioned at bottom */}
+            <div className="min-[460px]:block hidden">
+                <Navbar />
+            </div>
         </main>
     );
 }

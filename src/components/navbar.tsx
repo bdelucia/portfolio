@@ -41,6 +41,7 @@ export default function Navbar() {
                                         }),
                                         "size-12 text-background"
                                     )}
+                                    aria-label={`Navigate to ${item.label.toLowerCase()}`}
                                 >
                                     <item.icon className="size-4" />
                                 </Link>
@@ -67,6 +68,7 @@ export default function Navbar() {
                                             }),
                                             "size-12 text-background"
                                         )}
+                                        aria-label={`Visit my ${name} profile`}
                                     >
                                         <social.icon className="size-4" />
                                     </Link>
@@ -79,24 +81,10 @@ export default function Navbar() {
                     ))}
                 <Separator orientation="vertical" className="h-full py-2" />
                 <DockIcon key="animations">
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <AnimationToggle />
-                        </TooltipTrigger>
-                        <TooltipContent>
-                            <p>Toggle Animations</p>
-                        </TooltipContent>
-                    </Tooltip>
+                    <AnimationToggle />
                 </DockIcon>
                 <DockIcon key="theme">
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <ModeToggle />
-                        </TooltipTrigger>
-                        <TooltipContent>
-                            <p>Theme</p>
-                        </TooltipContent>
-                    </Tooltip>
+                    <ModeToggle />
                 </DockIcon>
             </Dock>
         </div>

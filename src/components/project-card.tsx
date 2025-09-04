@@ -59,10 +59,16 @@ export function ProjectCard({
             className={
                 "flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 ease-out h-full"
             }
+            role="article"
+            aria-labelledby={`project-title-${title
+                .replace(/\s+/g, "-")
+                .toLowerCase()}`}
         >
             <Link
                 href={href || "#"}
                 className={cn("block cursor-pointer", className)}
+                tabIndex={-1}
+                aria-hidden="true"
             >
                 {video && (
                     <video
@@ -73,30 +79,42 @@ export function ProjectCard({
                         playsInline
                         preload="metadata"
                         className="pointer-events-none mx-auto h-40 w-full object-cover object-top" // needed because random black line at bottom of video
+                        aria-hidden="true"
                     />
                 )}
                 {image && (
                     <Image
                         src={image}
-                        alt={title}
+                        alt=""
                         width={400}
                         height={240}
                         className="h-40 w-full overflow-hidden object-cover object-top"
                         loading="lazy"
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
                         quality={80}
+                        aria-hidden="true"
                     />
                 )}
             </Link>
             <CardHeader className="px-2">
                 <div className="space-y-1">
                     <div className="flex items-center justify-between">
-                        <CardTitle className="mt-1 text-base">
+                        <CardTitle
+                            id={`project-title-${title
+                                .replace(/\s+/g, "-")
+                                .toLowerCase()}`}
+                            className="mt-1 text-base"
+                        >
                             {title}
                         </CardTitle>
                         <button
                             onClick={handleExpandClick}
                             className="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors"
+                            aria-label={`${
+                                isExpanded ? "Collapse" : "Expand"
+                            } ${title} project details`}
+                            aria-expanded={isExpanded}
+                            tabIndex={0}
                         >
                             <ChevronRightIcon
                                 className={cn(
@@ -106,7 +124,13 @@ export function ProjectCard({
                             />
                         </button>
                     </div>
-                    <time className="font-sans text-xs">{dates}</time>
+                    <time
+                        className="font-sans text-xs"
+                        aria-label={`Project dates: ${dates}`}
+                        tabIndex={0}
+                    >
+                        {dates}
+                    </time>
                     <div className="hidden font-sans text-xs underline print:visible">
                         {link
                             ?.replace("https://", "")
@@ -124,10 +148,17 @@ export function ProjectCard({
                             ease: [0.16, 1, 0.3, 1],
                         }}
                         className="overflow-hidden"
+                        aria-hidden={!isExpanded}
                     >
-                        <Markdown className="prose max-w-full text-pretty font-sans text-xs text-muted-foreground dark:prose-invert">
-                            {description}
-                        </Markdown>
+                        <div
+                            tabIndex={isExpanded ? 0 : -1}
+                            role="text"
+                            aria-label={`${title} project description: ${description}`}
+                        >
+                            <Markdown className="prose max-w-full text-pretty font-sans text-xs text-muted-foreground dark:prose-invert">
+                                {description}
+                            </Markdown>
+                        </div>
                     </motion.div>
                 </div>
             </CardHeader>
@@ -144,12 +175,19 @@ export function ProjectCard({
                             ease: [0.16, 1, 0.3, 1],
                         }}
                         className="mt-2 flex flex-wrap gap-1 overflow-hidden"
+                        aria-hidden={!isExpanded}
+                        role="list"
+                        aria-label={`${title} project technologies`}
+                        tabIndex={isExpanded ? 0 : -1}
                     >
                         {tags?.map((tag) => (
                             <Badge
                                 className="px-1 py-0 text-[10px]"
                                 variant="secondary"
                                 key={tag}
+                                role="listitem"
+                                aria-label={`Technology: ${tag}`}
+                                tabIndex={isExpanded ? 0 : -1}
                             >
                                 {tag}
                             </Badge>
@@ -159,9 +197,19 @@ export function ProjectCard({
             </CardContent>
             <CardFooter className="px-2 pb-2">
                 {links && links.length > 0 && (
-                    <div className="flex flex-row flex-wrap items-start gap-1">
+                    <div
+                        className="flex flex-row flex-wrap items-start gap-1"
+                        role="list"
+                        aria-label={`${title} project links`}
+                    >
                         {links?.map((link, idx) => (
-                            <Link href={link?.href} key={idx} target="_blank">
+                            <Link
+                                href={link?.href}
+                                key={idx}
+                                target="_blank"
+                                aria-label={`${title} ${link.type} link`}
+                                role="listitem"
+                            >
                                 <Badge
                                     key={idx}
                                     className="flex gap-2 px-2 py-1 text-[10px]"

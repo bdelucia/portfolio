@@ -34,8 +34,8 @@ export const AnimationToggle = forwardRef<HTMLButtonElement, {}>(
                 )}
                 aria-label={
                     animationsEnabled
-                        ? "Disable animations"
-                        : "Enable animations"
+                        ? "Toggle Animations Button. The animations are currently on"
+                        : "Toggle Animations Button. The animations are currently off"
                 }
                 {...props}
             >

@@ -32,9 +32,9 @@ export const ModeToggle = forwardRef<HTMLButtonElement, {}>((props, ref) => {
                     handleToggle(e);
                 }
             }}
-            aria-label={`Switch to ${
-                theme === "dark" ? "light" : "dark"
-            } theme`}
+            aria-label={`Change Theme Button. The theme is currently ${
+                theme === "dark" ? "dark" : "light"
+            }`}
             {...props}
         >
             <SunIcon className="h-4 w-4 dark:hidden" />
