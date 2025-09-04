@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { motion, MotionProps, useInView } from "motion/react";
+import { motion, MotionProps } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
 interface TypingAnimationProps extends MotionProps {
@@ -30,10 +30,6 @@ export function TypingAnimation({
     const [started, setStarted] = useState(false);
     const [isClient, setIsClient] = useState(false);
     const elementRef = useRef<HTMLElement | null>(null);
-    const isInView = useInView(elementRef as React.RefObject<Element>, {
-        amount: 0.3,
-        once: true,
-    });
 
     useEffect(() => {
         setIsClient(true);
@@ -45,21 +41,12 @@ export function TypingAnimation({
         // Reset to empty string for animation
         setDisplayedText("");
 
-        if (!startOnView) {
-            const startTimeout = setTimeout(() => {
-                setStarted(true);
-            }, delay);
-            return () => clearTimeout(startTimeout);
-        }
-
-        if (!isInView) return;
-
         const startTimeout = setTimeout(() => {
             setStarted(true);
         }, delay);
 
         return () => clearTimeout(startTimeout);
-    }, [delay, startOnView, isInView, isClient]);
+    }, [delay, isClient]);
 
     useEffect(() => {
         if (!started) return;
