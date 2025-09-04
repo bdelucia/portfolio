@@ -80,7 +80,7 @@ export default function Navbar() {
                 <Separator orientation="vertical" className="h-full py-2" />
                 <DockIcon key="animations">
                     <Tooltip>
-                        <TooltipTrigger>
+                        <TooltipTrigger asChild>
                             <AnimationToggle />
                         </TooltipTrigger>
                         <TooltipContent>
@@ -90,7 +90,7 @@ export default function Navbar() {
                 </DockIcon>
                 <DockIcon key="theme">
                     <Tooltip>
-                        <TooltipTrigger>
+                        <TooltipTrigger asChild>
                             <ModeToggle />
                         </TooltipTrigger>
                         <TooltipContent>

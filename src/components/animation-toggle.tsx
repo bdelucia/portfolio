@@ -10,13 +10,20 @@ export const AnimationToggle = forwardRef<HTMLButtonElement, {}>(
     (props, ref) => {
         const { animationsEnabled, toggleAnimations } = useAnimations();
 
+        const handleToggle = (e: React.MouseEvent | React.KeyboardEvent) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleAnimations();
+        };
+
         return (
             <button
                 ref={ref}
-                onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    toggleAnimations();
+                onClick={handleToggle}
+                onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                        handleToggle(e);
+                    }
                 }}
                 className={cn(
                     buttonVariants({

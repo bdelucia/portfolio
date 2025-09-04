@@ -9,6 +9,12 @@ import { forwardRef } from "react";
 export const ModeToggle = forwardRef<HTMLButtonElement, {}>((props, ref) => {
     const { theme, setTheme } = useTheme();
 
+    const handleToggle = (e: React.MouseEvent | React.KeyboardEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setTheme(theme === "dark" ? "light" : "dark");
+    };
+
     return (
         <button
             ref={ref}
@@ -20,11 +26,15 @@ export const ModeToggle = forwardRef<HTMLButtonElement, {}>((props, ref) => {
                 }),
                 "size-12 text-background"
             )}
-            onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                setTheme(theme === "dark" ? "light" : "dark");
+            onClick={handleToggle}
+            onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                    handleToggle(e);
+                }
             }}
+            aria-label={`Switch to ${
+                theme === "dark" ? "light" : "dark"
+            } theme`}
             {...props}
         >
             <SunIcon className="h-4 w-4 dark:hidden" />
