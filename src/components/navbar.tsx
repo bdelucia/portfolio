@@ -32,19 +32,37 @@ export default function Navbar() {
                     <DockIcon key={item.href}>
                         <Tooltip>
                             <TooltipTrigger asChild>
-                                <Link
-                                    href={item.href}
-                                    className={cn(
-                                        buttonVariants({
-                                            variant: "ghost",
-                                            size: "icon",
-                                        }),
-                                        "size-12 text-background"
-                                    )}
-                                    aria-label={`Navigate to ${item.label.toLowerCase()}`}
-                                >
-                                    <item.icon className="size-4" />
-                                </Link>
+                                {item.href.startsWith("http") ? (
+                                    <a
+                                        href={item.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={cn(
+                                            buttonVariants({
+                                                variant: "ghost",
+                                                size: "icon",
+                                            }),
+                                            "size-12 text-background"
+                                        )}
+                                        aria-label={`Navigate to ${item.label.toLowerCase()}`}
+                                    >
+                                        <item.icon className="size-4" />
+                                    </a>
+                                ) : (
+                                    <Link
+                                        href={item.href}
+                                        className={cn(
+                                            buttonVariants({
+                                                variant: "ghost",
+                                                size: "icon",
+                                            }),
+                                            "size-12 text-background"
+                                        )}
+                                        aria-label={`Navigate to ${item.label.toLowerCase()}`}
+                                    >
+                                        <item.icon className="size-4" />
+                                    </Link>
+                                )}
                             </TooltipTrigger>
                             <TooltipContent>
                                 <p>{item.label}</p>

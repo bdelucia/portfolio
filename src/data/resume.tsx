@@ -30,8 +30,11 @@ export const DATA = {
         "Linux",
     ],
     navbar: [
-        { href: "/", icon: HomeIcon, label: "Home" },
-        { href: "/blog", icon: NotebookIcon, label: "Blog" },
+        {
+            href: "https://www.bobwithablog.dev/",
+            icon: NotebookIcon,
+            label: "Blog",
+        },
     ],
     contact: {
         email: "bdelucia@asu.edu",
