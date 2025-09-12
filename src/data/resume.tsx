@@ -28,7 +28,7 @@ export const DATA = {
         {
             title: "Beyond Coding",
             content:
-                "I enjoy cooking as much as eating.I make a mean chicken parmesan [(check out my blog post about it)](/blog/bobbehs-chicken-parmesan). Thanks for reading a little bit about me!",
+                "I enjoy cooking as much as eating. I make a mean chicken parmesan [(check out my blog post about it)](/blog/bobbehs-chicken-parmesan). Thanks for reading a little bit about me!",
         },
     ],
     avatarUrl: "/me.jpg",
