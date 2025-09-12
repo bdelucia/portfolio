@@ -16,6 +16,7 @@ import Link from "next/link";
 import Markdown from "react-markdown";
 import React from "react";
 import { ShinyButton } from "./magicui/shiny-button";
+import { useAnimations } from "@/contexts/AnimationContext";
 
 interface Props {
     title: string;
@@ -47,12 +48,25 @@ export function ProjectCard({
     className,
 }: Props) {
     const [isExpanded, setIsExpanded] = React.useState(false);
+    const { animationsEnabled } = useAnimations();
+    const videoRef = React.useRef<HTMLVideoElement>(null);
 
     const handleExpandClick = (e: React.MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
         setIsExpanded(!isExpanded);
     };
+
+    // Control video playback based on animations setting
+    React.useEffect(() => {
+        if (videoRef.current && video) {
+            if (animationsEnabled) {
+                videoRef.current.play();
+            } else {
+                videoRef.current.pause();
+            }
+        }
+    }, [animationsEnabled, video]);
 
     return (
         <Card
@@ -72,8 +86,9 @@ export function ProjectCard({
             >
                 {video && (
                     <video
+                        ref={videoRef}
                         src={video}
-                        autoPlay
+                        autoPlay={animationsEnabled}
                         loop
                         muted
                         playsInline

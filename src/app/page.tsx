@@ -20,6 +20,7 @@ import { PerformanceMonitor } from "@/components/performance-monitor";
 import { useAnimations } from "@/contexts/AnimationContext";
 import { IconCloud } from "@/components/magicui/icon-cloud";
 import { Switch } from "@/components/ui/switch";
+import { SwoopAnimation } from "@/components/magicui/swoop-animation";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -337,7 +338,7 @@ export default function Page() {
 
                 <section id="work" aria-labelledby="work-heading" role="region">
                     <div className="flex min-h-0 flex-col gap-y-3">
-                        <BlurFade delay={BLUR_FADE_DELAY * 5}>
+                        <SwoopAnimation delay={0.2}>
                             <h2
                                 id="work-heading"
                                 className="text-xl font-bold"
@@ -346,7 +347,7 @@ export default function Page() {
                             >
                                 Work Experience
                             </h2>
-                        </BlurFade>
+                        </SwoopAnimation>
                         {DATA.work.map((work, id) => (
                             <BlurFade
                                 key={work.company}
@@ -450,9 +451,7 @@ export default function Page() {
                                     {DATA.skills.map((skill, id) => (
                                         <BlurFade
                                             key={skill}
-                                            delay={
-                                                BLUR_FADE_DELAY * 11 + id * 0.05
-                                            }
+                                            delay={BLUR_FADE_DELAY + id * 0.05}
                                         >
                                             <div
                                                 role="listitem"
@@ -477,7 +476,7 @@ export default function Page() {
                     role="region"
                 >
                     <div className="space-y-12 w-full py-12">
-                        <BlurFade delay={BLUR_FADE_DELAY * 12}>
+                        <SwoopAnimation delay={0.2}>
                             <div className="flex flex-col items-center justify-center space-y-4 text-center">
                                 <div className="space-y-2">
                                     <div
@@ -508,7 +507,7 @@ export default function Page() {
                                     </p>
                                 </div>
                             </div>
-                        </BlurFade>
+                        </SwoopAnimation>
                         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto">
                             {DATA.projects.map((project, id) => (
                                 <BlurFade
@@ -537,7 +536,7 @@ export default function Page() {
                     role="region"
                 >
                     <div className="grid items-center justify-center gap-4 px-4 text-center md:px-6 w-full py-12">
-                        <BlurFade delay={BLUR_FADE_DELAY * 17}>
+                        <SwoopAnimation delay={0.2}>
                             <div className="space-y-3">
                                 <div
                                     className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm"
@@ -578,7 +577,7 @@ export default function Page() {
                                     respond as soon as possible.
                                 </p>
                             </div>
-                        </BlurFade>
+                        </SwoopAnimation>
                     </div>
                 </section>
             </div>
