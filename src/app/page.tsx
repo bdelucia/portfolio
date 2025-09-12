@@ -1,6 +1,5 @@
 "use client";
 import BlurFade from "@/components/magicui/blur-fade";
-import BlurFadeText from "@/components/magicui/blur-fade-text";
 import Navbar from "@/components/navbar";
 import { ProjectCard } from "@/components/project-card";
 import { ResumeCard } from "@/components/resume-card";
@@ -21,7 +20,6 @@ import { PerformanceMonitor } from "@/components/performance-monitor";
 import { useAnimations } from "@/contexts/AnimationContext";
 import { IconCloud } from "@/components/magicui/icon-cloud";
 import { Switch } from "@/components/ui/switch";
-import { Icons } from "@/components/icons";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -105,7 +103,7 @@ export default function Page() {
                         <div className="gap-2 grid grid-cols-5 justify-between max-[460px]:flex max-[460px]:flex-col max-[460px]:gap-4">
                             {/* Avatar for very small screens (above hero text) */}
                             <div
-                                className="xs:hidden col-span-full row-start-1 row-span-1 flex justify-center items-center mb-4"
+                                className="md:hidden col-span-full row-start-1 row-span-1 flex justify-center items-center mb-4"
                                 tabIndex={0}
                                 aria-label={`${DATA.name} profile picture`}
                             >
@@ -124,7 +122,7 @@ export default function Page() {
                             </div>
                             <section
                                 id="hero-text"
-                                className="col-span-3 row-start-0 row-span-1 max-[460px]:text-center max-[460px]:flex max-[460px]:flex-col max-[460px]:items-center"
+                                className="col-start-2 col-span-3 row-start-2 row-span-1 text-center flex flex-col items-center justify-center"
                                 aria-labelledby="hero-heading"
                                 role="banner"
                             >
@@ -237,76 +235,101 @@ export default function Page() {
                                     </div>
                                 </BlurFade>
                             </section>
-                            <div className="row-start-2 col-span-full xs:col-span-5 md:col-span-3 row-span-3 max-[460px]:row-start-auto max-[460px]:col-span-auto max-[460px]:row-span-auto">
-                                <section
-                                    id="about"
-                                    aria-labelledby="about-heading"
-                                    role="region"
-                                >
-                                    <BlurFade delay={BLUR_FADE_DELAY * 2}>
-                                        <h2
-                                            id="about-heading"
-                                            className="text-xl font-bold"
-                                            tabIndex={0}
+                            <div className="row-start-3 col-span-full row-span-3 max-[460px]:row-start-auto max-[460px]:col-span-auto max-[460px]:row-span-auto">
+                                <div className="flex flex-col md:flex-row gap-6 items-start">
+                                    {/* About Section */}
+                                    <div className="flex-1">
+                                        <section
+                                            id="about"
+                                            aria-labelledby="about-heading"
+                                            role="region"
                                         >
-                                            About
-                                        </h2>
-                                    </BlurFade>
-                                    <BlurFade delay={BLUR_FADE_DELAY * 2}>
-                                        <div
-                                            tabIndex={0}
-                                            aria-label="About me summary"
-                                            role="article"
-                                        >
-                                            <Markdown className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
-                                                {DATA.summary}
-                                            </Markdown>
-                                        </div>
-                                    </BlurFade>
-                                </section>
-                            </div>
-                            <div
-                                className="col-start-4 col-span-2 row-span-1 md:row-span-5 max-[460px]:col-start-auto max-[460px]:col-span-auto max-[460px]:row-span-auto"
-                                role="complementary"
-                                aria-label="Profile image"
-                            >
-                                <BlurFade delay={BLUR_FADE_DELAY}>
-                                    {/* Avatar for mobile/tablet (hidden on md and up, but only xs and up) */}
-                                    <div
-                                        className="xs:flex md:hidden hidden justify-center items-center"
-                                        tabIndex={0}
-                                        aria-label={`${DATA.name} profile picture`}
-                                    >
-                                        <Avatar className="size-28 border">
-                                            <AvatarImage
-                                                alt={`${DATA.name} profile picture`}
-                                                src={"/me.png"}
-                                                loading="lazy"
-                                            />
-                                            <AvatarFallback>
-                                                {DATA.initials}
-                                            </AvatarFallback>
-                                        </Avatar>
+                                            <BlurFade
+                                                delay={BLUR_FADE_DELAY * 2}
+                                            >
+                                                <h2
+                                                    id="about-heading"
+                                                    className="text-xl font-bold text-center"
+                                                    tabIndex={0}
+                                                >
+                                                    About me:
+                                                </h2>
+                                            </BlurFade>
+                                            {DATA.summarySections.map(
+                                                (section, index) => (
+                                                    <BlurFade
+                                                        key={section.title}
+                                                        delay={
+                                                            BLUR_FADE_DELAY *
+                                                            (2 + index)
+                                                        }
+                                                    >
+                                                        <div
+                                                            tabIndex={0}
+                                                            aria-label={`About me: ${section.title}`}
+                                                            role="article"
+                                                            className="mb-6 last:mb-0"
+                                                        >
+                                                            <h3 className="text-lg font-semibold mb-1 text-foreground italic">
+                                                                {section.title}
+                                                            </h3>
+                                                            <Markdown className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert indent-4">
+                                                                {
+                                                                    section.content
+                                                                }
+                                                            </Markdown>
+                                                        </div>
+                                                    </BlurFade>
+                                                )
+                                            )}
+                                        </section>
                                     </div>
-                                    {/* Image for desktop (hidden on screens smaller than md) */}
+
+                                    {/* Profile Image */}
                                     <div
-                                        className="hidden md:block"
-                                        tabIndex={0}
-                                        aria-label={`${DATA.name} profile image`}
+                                        className="flex-shrink-0"
+                                        role="complementary"
+                                        aria-label="Profile image"
                                     >
-                                        <Image
-                                            src={DATA.avatarUrl}
-                                            alt={`${DATA.name} profile image`}
-                                            width={400}
-                                            height={600}
-                                            className="h-auto w-[100%] rounded-lg"
-                                            priority={false}
-                                            loading="lazy"
-                                            sizes="(max-width: 1024px) 200px, 300px"
-                                            quality={85}
-                                        />
+                                        <BlurFade delay={BLUR_FADE_DELAY}>
+                                            {/* Avatar for mobile/tablet (hidden on md and up, but only xs and up) */}
+                                            <div
+                                                className="max-[460px]:flex md:hidden hidden justify-center items-center"
+                                                tabIndex={0}
+                                                aria-label={`${DATA.name} profile picture`}
+                                            >
+                                                <Avatar className="size-28 border">
+                                                    <AvatarImage
+                                                        alt={`${DATA.name} profile picture`}
+                                                        src={"/me.png"}
+                                                        loading="lazy"
+                                                    />
+                                                    <AvatarFallback>
+                                                        {DATA.initials}
+                                                    </AvatarFallback>
+                                                </Avatar>
+                                            </div>
+                                            {/* Image for desktop (hidden on screens smaller than md) */}
+                                            <div
+                                                className="hidden md:block"
+                                                tabIndex={0}
+                                                aria-label={`${DATA.name} profile image`}
+                                            >
+                                                <Image
+                                                    src={DATA.avatarUrl}
+                                                    alt={`${DATA.name} profile image`}
+                                                    width={400}
+                                                    height={600}
+                                                    className="h-auto w-[100%] rounded-lg"
+                                                    priority={false}
+                                                    loading="lazy"
+                                                    sizes="(max-width: 1024px) 200px, 300px"
+                                                    quality={85}
+                                                />
+                                            </div>
+                                        </BlurFade>
                                     </div>
-                                </BlurFade>
+                                </div>
                             </div>
                         </div>
                     </div>

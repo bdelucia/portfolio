@@ -9,8 +9,28 @@ export const DATA = {
     location: "Glendale, AZ",
     locationLink: "https://www.google.com/maps/place/glendaleaz",
     description: "though people call me:",
-    summary:
-        "I’ve grown from playing Reader Rabbit in 1st grade to building my first computer at 13, and now to developing full-stack applications from the ground up. I explored a lot of routes in my time at ASU, such as data science and astrophysics, but I'm now focusing on building full-stack applications and websites. I have a soft spot for game development, I have made a few games in my time at ASU, with IDEs like Unity and GameMaker Studio. I also make a mean chicken parmesan [(check out my blog post about it)](/blog/bobbehs-chicken-parmesan). I use Arch btw. ",
+    summarySections: [
+        {
+            title: "Early Tech Journey",
+            content:
+                "My passion for computers started early—playing Reader Rabbit in 1st grade, building my first desktop at 13 with money from cleaning windows, and exploring content creation with my first [website](https://ultimateminecraftblog.weebly.com/index.html) and YouTube channels. Throughout school, I tinkered with programming: Lego Mindstorms robots in 5th grade, HTML/CSS websites in 10th grade, and even Scheme programs in 12th grade.",
+        },
+        {
+            title: "College & Linux Discovery",
+            content:
+                "At ASU (#1 in innovation baby), I explored data science, astrophysics, and game development. Everything changed when I joined the Linux Users Group—I was blown away by the cutting-edge technologies other members were working on: Next.js SaaS apps for hackathons, Neovim, Arch Linux ricing contests, and more. Check out my personal Arch Linux config [here](https://dub.sh/bobbeh-arch-rice).",
+        },
+        {
+            title: "Adventures in Phoenix",
+            content:
+                "Living in Downtown Phoenix, I discovered new hobbies like skateboarding (though I wasn't great at it—broke my wrist on my way back from Calculus 3, which was honestly less painful than that class). I tried an e-skateboard but was underwhelmed, then discovered electric unicycles when I moved to Tempe. I joined a massive group that goes on rides around Tempe and bought my first one in fall 2023.",
+        },
+        {
+            title: "Beyond Coding",
+            content:
+                "I enjoy cooking as much as eating—I make a mean chicken parmesan [(check out my blog post about it)](/blog/bobbehs-chicken-parmesan). Thanks for reading a little bit about me!",
+        },
+    ],
     avatarUrl: "/me.jpg",
     skills: [
         "React",
