@@ -1,11 +1,11 @@
 import { Icons } from "@/components/icons";
-import { HomeIcon, NotebookIcon } from "lucide-react";
+import { NotebookIcon } from "lucide-react";
 
 export const DATA = {
     name: "Robert DeLucia",
     nicknames: ["Bobby", "Bobbeh", "Bobert"],
     initials: "RD",
-    url: "https://dillion.io",
+    url: "https://bobbeh.io",
     location: "Glendale, AZ",
     locationLink: "https://www.google.com/maps/place/glendaleaz",
     description: "though people call me:",
@@ -13,22 +13,22 @@ export const DATA = {
         {
             title: "Early Tech Journey",
             content:
-                "My passion for computers started early: playing Reader Rabbit in 1st grade, building my first desktop at 13 with money from cleaning windows, and exploring content creation with my first [website](https://ultimateminecraftblog.weebly.com/index.html) and YouTube channels. Throughout school, I tinkered with programming: Lego Mindstorms robots in 5th grade, HTML/CSS websites in 10th grade, and even Scheme programs in 12th grade.",
+                "My passion for computers started early: playing Reader Rabbit in 1st grade, building my first PC at 13, and exploring content creation through websites and YouTube. Throughout school, I tinkered with programming, from Lego Mindstorms robots to HTML/CSS websites and even Scheme in 12th grade.",
         },
         {
             title: "College & Linux Discovery",
             content:
-                "At ASU (#1 in innovation baby), I explored data science, astrophysics, and game development. Everything changed when I joined the Linux Users Group. I was blown away by the cutting-edge technologies other members were working on: Next.js SaaS apps for hackathons, Neovim, Arch Linux ricing contests, and more. Check out my personal Arch Linux config [here](https://dub.sh/bobbeh-arch-rice).",
+                "At ASU, I explored different fields of study, including data science, astrophysics, and game development. ASU's Linux Users Group (ASULUG) opened my eyes to what bleeding edge technology the open-source community was working on. I got exposed to a lot of different technologies, including Next.js SaaS apps, Neovim, and Arch Linux customization. (Check out my Arch Linux config [here!](https://dub.sh/bobbeh-arch-rice)",
         },
         {
             title: "Adventures in Phoenix/Tempe",
             content:
-                "Living in Downtown Phoenix, I discovered new hobbies like skateboarding (though I wasn't great at it... I broke my wrist on my way back from Calculus 3, which was honestly less painful than that class). I tried an e-skateboard but was underwhelmed, then discovered electric unicycles when I moved to Tempe. I joined a massive group that goes on rides around Tempe and bought my first one in fall 2023.",
+                "Living in Phoenix and Tempe sparked my love for outdoor exploration and personal electric vehicles (PEVs). After a few years of e-skateboarding, I eventually discovered electric unicycles (what I consider to be the pinnacle of PEVs) and bought my first one in summer 2023.",
         },
         {
             title: "Beyond Coding",
             content:
-                "I enjoy cooking as much as eating. I make a mean chicken parmesan [(check out my blog post about it)](/blog/bobbehs-chicken-parmesan). Thanks for reading a little bit about me!",
+                "I enjoy cooking as much as eating. I cook a variety of dishes, but my favorite cuisine is Italian. I make a mean chicken parmesan [(check out my blog post about it)](/blog/bobbehs-chicken-parmesan).",
         },
     ],
     avatarUrl: "/me.jpg",

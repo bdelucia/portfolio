@@ -5,6 +5,7 @@ import { ProjectCard } from "@/components/project-card";
 import { ResumeCard } from "@/components/resume-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 import { DATA } from "@/data/resume";
 import Link from "next/link";
 import Markdown from "react-markdown";
@@ -237,6 +238,18 @@ export default function Page() {
                                 </BlurFade>
                             </section>
                             <div className="row-start-3 col-span-full row-span-3 max-[460px]:row-start-auto max-[460px]:col-span-auto max-[460px]:row-span-auto">
+                                {/* About Me Title */}
+                                <BlurFade delay={BLUR_FADE_DELAY * 2}>
+                                    <h2
+                                        id="about-heading"
+                                        className="text-xl font-bold text-left mb-4"
+                                        tabIndex={0}
+                                    >
+                                        About me:
+                                    </h2>
+                                </BlurFade>
+
+                                {/* Flexbox with sections and picture */}
                                 <div className="flex flex-col md:flex-row gap-6 items-start">
                                     {/* About Section */}
                                     <div className="flex-1">
@@ -245,42 +258,40 @@ export default function Page() {
                                             aria-labelledby="about-heading"
                                             role="region"
                                         >
-                                            <BlurFade
-                                                delay={BLUR_FADE_DELAY * 2}
-                                            >
-                                                <h2
-                                                    id="about-heading"
-                                                    className="text-xl font-bold text-center"
-                                                    tabIndex={0}
-                                                >
-                                                    About me:
-                                                </h2>
-                                            </BlurFade>
                                             {DATA.summarySections.map(
                                                 (section, index) => (
-                                                    <BlurFade
-                                                        key={section.title}
-                                                        delay={
-                                                            BLUR_FADE_DELAY *
-                                                            (2 + index)
-                                                        }
-                                                    >
-                                                        <div
-                                                            tabIndex={0}
-                                                            aria-label={`About me: ${section.title}`}
-                                                            role="article"
-                                                            className="mb-6 last:mb-0"
+                                                    <div key={section.title}>
+                                                        <BlurFade
+                                                            delay={
+                                                                BLUR_FADE_DELAY *
+                                                                (2 + index)
+                                                            }
                                                         >
-                                                            <h3 className="text-lg font-semibold mb-1 text-foreground italic">
-                                                                {section.title}
-                                                            </h3>
-                                                            <Markdown className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert indent-4">
-                                                                {
-                                                                    section.content
-                                                                }
-                                                            </Markdown>
-                                                        </div>
-                                                    </BlurFade>
+                                                            <div
+                                                                tabIndex={0}
+                                                                aria-label={`About me: ${section.title}`}
+                                                                role="article"
+                                                                className="flex flex-col gap-2"
+                                                            >
+                                                                <h3 className="text-lg font-semibold text-foreground italic text-center">
+                                                                    {
+                                                                        section.title
+                                                                    }
+                                                                </h3>
+                                                                <Markdown className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert indent-8">
+                                                                    {
+                                                                        section.content
+                                                                    }
+                                                                </Markdown>
+                                                            </div>
+                                                        </BlurFade>
+                                                        {index <
+                                                            DATA.summarySections
+                                                                .length -
+                                                                1 && (
+                                                            <Separator className="my-2" />
+                                                        )}
+                                                    </div>
                                                 )
                                             )}
                                         </section>
