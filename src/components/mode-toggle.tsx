@@ -4,20 +4,17 @@ import { buttonVariants } from "@/components/ui/button";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
-import { forwardRef } from "react";
 
-export const ModeToggle = forwardRef<HTMLButtonElement, {}>((props, ref) => {
+export const ModeToggle = () => {
     const { theme, setTheme } = useTheme();
 
-    const handleToggle = (e: React.MouseEvent | React.KeyboardEvent) => {
-        e.preventDefault();
-        e.stopPropagation();
+    const handleToggle = () => {
+        console.log("Theme toggle clicked!", theme);
         setTheme(theme === "dark" ? "light" : "dark");
     };
 
     return (
         <button
-            ref={ref}
             type="button"
             className={cn(
                 buttonVariants({
@@ -29,18 +26,16 @@ export const ModeToggle = forwardRef<HTMLButtonElement, {}>((props, ref) => {
             onClick={handleToggle}
             onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
-                    handleToggle(e);
+                    e.preventDefault();
+                    handleToggle();
                 }
             }}
             aria-label={`Change Theme Button. The theme is currently ${
                 theme === "dark" ? "dark" : "light"
             }`}
-            {...props}
         >
             <SunIcon className="h-4 w-4 dark:hidden" />
             <MoonIcon className="hidden h-4 w-4 dark:block" />
         </button>
     );
-});
-
-ModeToggle.displayName = "ModeToggle";
+};
