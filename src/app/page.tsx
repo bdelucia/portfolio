@@ -29,6 +29,14 @@ export default function Page() {
     const { theme: currentTheme, resolvedTheme, systemTheme } = useTheme();
     const { animationsEnabled, toggleAnimations } = useAnimations();
     const [mounted, setMounted] = useState(false);
+    const [showIconCloud, setShowIconCloud] = useState(true);
+
+    // Sync skills view with animations when animations are turned off
+    useEffect(() => {
+        if (!animationsEnabled && showIconCloud) {
+            setShowIconCloud(false);
+        }
+    }, [animationsEnabled, showIconCloud]);
 
     // Use resolvedTheme for consistent rendering, fallback to systemTheme
     const effectiveTheme = resolvedTheme || systemTheme || "light";
@@ -304,23 +312,6 @@ export default function Page() {
                                         aria-label="Profile image"
                                     >
                                         <BlurFade delay={BLUR_FADE_DELAY}>
-                                            {/* Avatar for mobile/tablet (hidden on md and up, but only xs and up) */}
-                                            <div
-                                                className="max-[460px]:flex md:hidden hidden justify-center items-center"
-                                                tabIndex={0}
-                                                aria-label={`${DATA.name} profile picture`}
-                                            >
-                                                <Avatar className="size-28 border">
-                                                    <AvatarImage
-                                                        alt={`${DATA.name} profile picture`}
-                                                        src={"/me.png"}
-                                                        loading="lazy"
-                                                    />
-                                                    <AvatarFallback>
-                                                        {DATA.initials}
-                                                    </AvatarFallback>
-                                                </Avatar>
-                                            </div>
                                             {/* Image for desktop (hidden on screens smaller than md) */}
                                             <div
                                                 className="hidden md:block"
@@ -436,9 +427,9 @@ export default function Page() {
                                         Icon Cloud
                                     </span>
                                     <Switch
-                                        checked={!animationsEnabled}
+                                        checked={!showIconCloud}
                                         onCheckedChange={(checked) => {
-                                            toggleAnimations();
+                                            setShowIconCloud(!checked);
                                         }}
                                         aria-label="Toggle between icon cloud and badges view"
                                     />
@@ -449,7 +440,7 @@ export default function Page() {
                             </div>
                         </BlurFade>
                         <BlurFade delay={BLUR_FADE_DELAY * 10}>
-                            {animationsEnabled ? (
+                            {showIconCloud ? (
                                 <div className="flex justify-center">
                                     <IconCloud images={skillIconUrls} />
                                 </div>
