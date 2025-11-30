@@ -51,7 +51,7 @@ export const DATA = {
     ],
     navbar: [
         {
-            href: "https://www.bobwithablog.com/",
+            href: "https://www.bobwithablog.dev/",
             icon: NotebookIcon,
             label: "Blog",
         },
